@@ -1,32 +1,59 @@
 import React from "react";
 import "./Header.css";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import { Notifications, ExpandMore } from "@material-ui/icons";
+import { Link } from 'react-router-dom';
 import Logo from "../../assets/logo.png";
 
-const Header = () => {
+const unauthenOption = (
+  <div className="header-unauthen-right">
+    <Link to="/" >
+      <Button color="primary" variant="contained" >Sign Up</Button>
+    </Link>
+    <Link to="/">
+      <Button color="primary" variant="contained">Sign In</Button>
+    </Link>
+  </div>
+)
+
+const authenOption = (
+  <>
+    <div className="header-menu">
+      <Link className="item-link" to='\'> Home </Link>
+      <Link className='item-link' to='\'> Explore services </Link>
+    </div>
+
+    <div className="header-right">
+      <Link className="header-info" to='\'>
+        <Avatar src="https://icdn.dantri.com.vn/2017/emma-watson-5-1488809769584.jpg" />
+        <h4> Emma Watson </h4>
+      </Link>
+
+      <div className="header-icon">
+        <Link className="notification-link" to='\'>
+          <Notifications fontSize="large" />
+        </Link>
+        <div class="dropdown">
+          <ExpandMore fontSize="large" />
+          <div class="dropdown-content">
+            <Link to='/'>Settings</Link>
+            <Link to='/'>Log out</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>
+)
+
+const Header = ({user}) => {
   return (
     <div className="header">
-      <div className="header-logo">
+      <Link to="/" className="header-logo" >
         <img src={Logo} alt="logo"></img>
         <h1 className="app-name">iTravel</h1>
-      </div>
+      </Link>
 
-      <div className="header-menu">
-        <h2> Home </h2>
-        <h2> Explore services </h2>
-      </div>
-
-      <div className="header-right">
-        <div className="header-info">
-          <Avatar src="https://icdn.dantri.com.vn/2017/emma-watson-5-1488809769584.jpg" />
-          <h4> Emma Watson </h4>
-        </div>
-        <div className="header-icon">
-          <Notifications fontSize="large" />
-          <ExpandMore fontSize="large" />
-        </div>
-      </div>
+      {user ? authenOption : unauthenOption}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import ServiceProviderProfilePage from './pages/profile/service-provider'
 // testing data
 import service from './data/service'
 import user from './data/user'
+import CreateServicePage from './pages/create-service'
 
 const theme = createTheme({
   spacing: 4,
@@ -24,7 +25,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <ServiceProviderProfilePage user={user} />
+      <CreateServicePage />
     </ThemeProvider>
   )
 }

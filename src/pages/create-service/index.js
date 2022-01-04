@@ -1,30 +1,77 @@
 import React from 'react'
-import Box from '@mui/material/Box'
+import {
+  Box,
+  InputBase,
+  TextField,
+  FormControl,
+  InputAdornment,
+  OutlinedInput,
+} from '@mui/material'
 import IconButton from '@mui/material/IconButton'
-import Input from '@mui/material/Input'
 import FilledInput from '@mui/material/FilledInput'
-import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
-import InputAdornment from '@mui/material/InputAdornment'
 import FormHelperText from '@mui/material/FormHelperText'
-import FormControl from '@mui/material/FormControl'
-import TextField from '@mui/material/TextField'
 import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import { LocationOn, AttachMoney } from '@mui/icons-material'
+
+import style from './style'
 
 const CreateServicePage = () => {
   return (
-    <Box component="form" noValidate autoComplete="off">
-      <TextField label="Service Name" variant="standard" focused />
-      <TextField label="Location" variant="outlined" focused />
-      <TextField label="Price" variant="outlined" focused />
-      <TextField
-        label="Description"
-        variant="outlined"
-        focused
-        multiline
-        rows={4}
+    <Box sx={style.container} component="form" noValidate autoComplete="off">
+      <InputBase
+        sx={style.title}
+        placeholder="Enter Service Name"
+        // inputProps={{ 'aria-label': 'search google maps' }}
       />
+      <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
+        <OutlinedInput
+          color="secondary"
+          startAdornment={
+            <InputAdornment position="start">
+              <LocationOn
+                sx={{ color: 'secondary.main', fontSize: 24, marginRight: 3 }}
+              />
+              <Box component="span" sx={style.detail}>
+                Location
+              </Box>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
+      <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
+        <OutlinedInput
+          color="secondary"
+          startAdornment={
+            <InputAdornment position="start">
+              <AttachMoney
+                sx={{
+                  color: 'secondary.main',
+                  fontSize: 24,
+                  marginRight: 3,
+                }}
+              />
+              <Box component="span" sx={style.detail}>
+                Price
+              </Box>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
+      <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
+        <OutlinedInput
+          color="secondary"
+          startAdornment={
+            <InputAdornment position="start">
+              <Box component="span" sx={style.detail}>
+                Description
+              </Box>
+            </InputAdornment>
+          }
+          multiline
+          rows={4}
+        />
+      </FormControl>
     </Box>
   )
 }

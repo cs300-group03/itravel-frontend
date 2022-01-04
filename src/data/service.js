@@ -31,6 +31,7 @@ const service = {
     'http://homestay3mien.com/wp-content/uploads/2019/07/Pour-homestay-6.jpg',
     'https://cdn.vietnammoi.vn/stores/news_dataimages/anhttl/012017/03/16/1802_home_of_dreamer_24.jpg',
   ],
+  url: 'https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwiikt6y55j1AhVDQd4KHcJnDyoQPAgI',
 }
 
 export default service

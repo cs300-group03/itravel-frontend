@@ -27,7 +27,7 @@ const service = {
     unit: unit.NIGHT,
   },
   image: [
-    'http://streaming1.danviet.vn/upload/3-2019/images/2019-08-04/home-1564907015-width1080height1350.jpg',
+    'https://homestay.review/wp-content/uploads/2018/11/Ngoi-nha-nam-tren-mat-ho-vo-cung-tho-mong-1024x683.png',
     'http://homestay3mien.com/wp-content/uploads/2019/07/Pour-homestay-6.jpg',
     'https://cdn.vietnammoi.vn/stores/news_dataimages/anhttl/012017/03/16/1802_home_of_dreamer_24.jpg',
   ],

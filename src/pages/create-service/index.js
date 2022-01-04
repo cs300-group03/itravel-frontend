@@ -2,6 +2,7 @@ import React from 'react'
 import {
   Box,
   InputBase,
+  Button,
   TextField,
   FormControl,
   InputAdornment,
@@ -24,8 +25,10 @@ const CreateServicePage = () => {
         placeholder="Enter Service Name"
         // inputProps={{ 'aria-label': 'search google maps' }}
       />
-      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+      <Box
+        sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}
+      >
+        <Box sx={{ display: 'flex', flexDirection: 'column', m: 5 }}>
           <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
             <OutlinedInput
               color="secondary"
@@ -79,7 +82,35 @@ const CreateServicePage = () => {
             />
           </FormControl>
         </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}></Box>
+        <Box sx={{ display: 'flex', flexDirection: 'column', m: 5 }}>
+          <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
+            <OutlinedInput
+              color="secondary"
+              startAdornment={
+                <InputAdornment position="start">
+                  <Box component="span" sx={style.detail}>
+                    Category
+                  </Box>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </Box>
+      </Box>
+      <Box>
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{
+            fontFamily: 'Poppins',
+            textTransform: 'none',
+            color: '#ffffff',
+            borderRadius: 15,
+            paddingX: 20,
+          }}
+        >
+          Go Public!
+        </Button>
       </Box>
     </Box>
   )

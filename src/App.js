@@ -3,9 +3,11 @@ import Header from './components/Header/Header'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import ServiceCard from './components/service-card'
+import ServiceProviderProfilePage from './pages/profile/service-provider'
 
 // testing data
 import service from './data/service'
+import user from './data/user'
 
 const theme = createTheme({
   spacing: 4,
@@ -22,13 +24,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <Header user={false} />
-        <ServiceCard service={service} />
-        <Routes>
-          <Route path="/" element="" />
-        </Routes>
-      </Router>
+      <ServiceProviderProfilePage user={user} />
     </ThemeProvider>
   )
 }

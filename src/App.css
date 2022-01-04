@@ -3,4 +3,6 @@
 * {
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  --primary: #F4A442;
+  --secondary: #125C13;
 }

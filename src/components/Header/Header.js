@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
-import { Avatar, Button } from "@material-ui/core";
-import { Notifications, ExpandMore } from "@material-ui/icons";
+import { Avatar, Button } from "@mui/material";
+import { Notifications, ExpandMore } from "@mui/icons-material";
 import { Link } from 'react-router-dom';
 import Logo from "../../assets/logo.png";
 

@@ -24,7 +24,7 @@ const ServiceCard = ({ service }) => {
           Location: {service.location.address} - {service.location.province} -{' '}
           {service.location.country}
         </Box>
-        <Box component="span" sx={style.description}>
+        <Box component="span" sx={style.description} >
           Price: {service.price.from}$ - {service.price.to}$/
           {service.price.unit}
         </Box>

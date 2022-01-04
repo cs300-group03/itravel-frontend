@@ -6,7 +6,7 @@ const style = {
     overflow: 'hidden',
     borderRadius: '20px',
     boxShadow: 5,
-    margin: 5,
+    margin: 15,
   },
   textContainer: {
     display: 'flex',
@@ -16,20 +16,29 @@ const style = {
     marginTop: 15,
   },
   image: {
-    height: 335,
-    width: 575,
-    // maxHeight: { xs: 335, md: 167 },
-    // maxWidth: { xs: 575, md: 250 },
+    height: 250,
+    width: 450,
     borderRadius: '20px',
     margin: 5,
   },
   title: {
-    fontSize: 30,
+    fontSize: 24,
     fontWeight: 'medium',
-    color: 'primary.main',
+    color: 'secondary.main',
     marginBottom: 5,
   },
-  description: { fontSize: 24, fontWeight: 'light' },
+  descriptionContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  description: {
+    fontSize: 18,
+    fontWeight: 'light',
+    margin: 1,
+    textAlignVertical: 'center',
+  },
+  icon: { color: 'secondary.main', fontSize: 30 },
 }
 
 export default style

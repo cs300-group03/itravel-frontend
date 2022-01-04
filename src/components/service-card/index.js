@@ -1,8 +1,7 @@
 import React from 'react'
 import { Box, IconButton } from '@mui/material'
 import style from './style'
-import { MoreHoriz, Bed } from '@mui/icons-material'
-import { Dropdown } from 'bootstrap'
+import { MoreHoriz, Bed, LocationOn, AttachMoney } from '@mui/icons-material'
 
 const ServiceCard = ({ service }) => {
   return (
@@ -20,13 +19,19 @@ const ServiceCard = ({ service }) => {
           <Box component="span" sx={style.title}>
             {service.name}
           </Box>
-          <Box component="span" sx={style.description}>
-            Location: {service.location.address} - {service.location.province} -{' '}
-            {service.location.country}
+          <Box sx={style.descriptionContainer}>
+            <LocationOn sx={style.icon} />
+            <Box component="span" sx={style.description}>
+              Location: {service.location.address} - {service.location.province}{' '}
+              - {service.location.country}
+            </Box>
           </Box>
-          <Box component="span" sx={style.description}>
-            Price: {service.price.from}$ - {service.price.to}$/
-            {service.price.unit}
+          <Box sx={style.descriptionContainer}>
+            <AttachMoney sx={style.icon} />
+            <Box component="span" sx={style.description}>
+              Price: {service.price.from}$ - {service.price.to}$/
+              {service.price.unit}
+            </Box>
           </Box>
         </Box>
 

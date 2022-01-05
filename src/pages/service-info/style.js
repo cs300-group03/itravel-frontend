@@ -3,6 +3,7 @@ const style = {
     alignContent: 'center',
     display: 'flex',
     flexDirection: 'column',
+    // alignItems: 'center',
   },
   imageContainer: {
     display: 'flex',
@@ -22,7 +23,7 @@ const style = {
   },
   title: {
     fontWeight: 'bold',
-    fontSize: 36,
+    fontSize: 48,
     // color: 'secondary.main',
     mt: 15,
     alignSelf: 'center',
@@ -32,6 +33,7 @@ const style = {
     width: 500,
     height: 300,
     borderRadius: 5,
+    marginX: 10,
   },
 }
 

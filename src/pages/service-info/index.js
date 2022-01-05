@@ -30,7 +30,7 @@ const ServiceInfoPage = ({ service }) => {
   let _icon = getIcon({
     serviceType: service.type,
     m: 1,
-    s: 24,
+    s: 36,
     c: 'secondary.main',
   })
   const img = service.images.map((image) => (
@@ -61,26 +61,74 @@ const ServiceInfoPage = ({ service }) => {
 
       <Box sx={style.imageContainer}>{img}</Box>
 
-      <Box>
-        <Box sx={style.avatarContainer}>
-          {_icon}
-          <Box component="span" sx={{ ml: 1, alignSelf: 'center' }}>
-            {service.type}
+      <Box sx={{ display: 'flex', flexDirection: 'row', my: 20, mx: 30 }}>
+        <Box sx={{ mx: 10, flex: 1 }}>
+          <Box sx={style.avatarContainer}>
+            {_icon}
+            <Box
+              component="span"
+              sx={{ ml: 1, alignSelf: 'center', fontSize: 24 }}
+            >
+              {service.type}
+            </Box>
+          </Box>
+          <Box sx={style.avatarContainer}>
+            <LocationOn sx={{ m: 1, fontSize: 36, color: 'secondary.main' }} />
+            <Box
+              component="span"
+              sx={{ ml: 1, fontSize: 24, alignSelf: 'center' }}
+            >
+              {service.location.province}
+            </Box>
+          </Box>
+          <Box sx={style.avatarContainer}>
+            <AttachMoney sx={{ m: 1, fontSize: 36, color: 'secondary.main' }} />
+            <Box
+              component="span"
+              sx={{ ml: 1, fontSize: 24, alignSelf: 'center' }}
+            >
+              {service.price.from}$ - {service.price.to}$/{service.price.unit}
+            </Box>
           </Box>
         </Box>
-        <Box sx={style.avatarContainer}>
-          <LocationOn sx={{ m: 1, fontSize: 24, color: 'secondary.main' }} />
-          <Box component="span" sx={{ ml: 1, alignSelf: 'center' }}>
-            {service.location.province}
+
+        <Box sx={{ mx: 10, flex: 4 }}>
+          <Box
+            component="span"
+            sx={{
+              fontWeight: '600',
+              fontSize: 36,
+              color: 'secondary.main',
+            }}
+          >
+            Description
+          </Box>
+          <Box
+            sx={{
+              fontWeight: 'light',
+              fontSize: 24,
+            }}
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+            tellus lectus, tincidunt vitae felis varius, dignissim rutrum dui.
+            Nunc massa magna, accumsan ut turpis id, laoreet ultrices odio.{' '}
           </Box>
         </Box>
-        <Box sx={style.avatarContainer}>
-          <AttachMoney sx={{ m: 1, fontSize: 24, color: 'secondary.main' }} />
-          <Box component="span" sx={{ ml: 1, alignSelf: 'center' }}>
-            {service.price.from}$ - {service.price.to}$/{service.price.unit}
-          </Box>
-        </Box>
-        <Box></Box>
+      </Box>
+      <Box sx={{ alignSelf: 'center' }}>
+        <Button
+          variant="contained"
+          sx={{
+            fontFamily: 'Poppins',
+            fontSize: 36,
+            textTransform: 'none',
+            color: '#ffffff',
+            borderRadius: 15,
+            paddingX: 20,
+          }}
+        >
+          Book Now!
+        </Button>
       </Box>
     </Box>
   )

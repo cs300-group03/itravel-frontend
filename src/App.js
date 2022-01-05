@@ -1,11 +1,13 @@
 import './App.css'
-import Header from './components/Header/Header'
+import Header from './components/header/Header'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ServiceCard from './components/service-card'
-
+import ScheduleCard from './components/schedule-card/creator-view';
 // testing data
+import schedule from './data/schedule'
 import service from './data/service'
+
 
 const theme = createTheme({
   spacing: 4,
@@ -24,7 +26,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Header user={false} /> 
-        <ServiceCard service={service} />
+        <ScheduleCard schedule={schedule} />
+        <ScheduleCard schedule={schedule} />
         <Routes>
           <Route path="/" element="" />
         </Routes>

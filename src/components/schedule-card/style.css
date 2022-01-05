@@ -1,0 +1,26 @@
+.description {
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+}
+
+.icons{
+  font-weight: thin;
+  font-size: small;
+  margin-left: 60px;
+  display: flex;
+  direction: row;
+  column-gap: 5px;
+  justify-content: center;
+  
+}
+
+.info{
+  display: flex;
+  direction: row;
+  align-items: center;
+  font-size: lighter;
+  justify-content: space-between;
+  column-gap: 10px;
+}

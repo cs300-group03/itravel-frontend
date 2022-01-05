@@ -14,4 +14,6 @@ const user = {
     'https://i.pinimg.com/originals/d6/a9/57/d6a957f1d8045c9c973c12bf5968326f.jpg',
 }
 
+service.owner = user
+
 export default user

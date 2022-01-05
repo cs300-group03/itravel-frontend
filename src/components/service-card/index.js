@@ -1,12 +1,14 @@
 import React from 'react'
 import { Box, IconButton } from '@mui/material'
 import style from './style'
-import { MoreHoriz, Bed, LocationOn, AttachMoney } from '@mui/icons-material'
+import { type, getIcon } from '../../data/service'
+import { MoreHoriz, Place, AttachMoney } from '@mui/icons-material'
 
 const ServiceCard = ({ service }) => {
+  let _icon = getIcon({ serviceType: service.type, m: 5, s: 36 })
   return (
     <Box sx={style.container}>
-      <Box component="img" sx={style.image} src={service.image[0]} />
+      <Box component="img" sx={style.image} src={service.images[0]} />
 
       <Box
         sx={{
@@ -20,7 +22,7 @@ const ServiceCard = ({ service }) => {
             {service.name}
           </Box>
           <Box sx={style.descriptionContainer}>
-            <LocationOn sx={style.icon} />
+            <Place sx={style.icon} />
             <Box component="span" sx={style.description}>
               Location: {service.location.address} - {service.location.province}{' '}
               - {service.location.country}
@@ -48,7 +50,7 @@ const ServiceCard = ({ service }) => {
           >
             <MoreHoriz />
           </IconButton>
-          <Bed sx={{ margin: 5, fontSize: 36 }} />
+          {_icon}
         </Box>
       </Box>
     </Box>

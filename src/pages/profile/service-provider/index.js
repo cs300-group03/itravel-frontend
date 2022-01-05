@@ -10,12 +10,7 @@ const ServiceProviderProfilePage = ({ user }) => {
   ))
   return (
     <Box sx={style.container}>
-      <Button
-        fullWidth
-        variant="contained"
-        startIcon={<Add />}
-        sx={style.createButton}
-      >
+      <Button variant="contained" startIcon={<Add />} sx={style.createButton}>
         Create new service
       </Button>
       <Box

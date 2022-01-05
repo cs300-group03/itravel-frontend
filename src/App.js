@@ -7,6 +7,7 @@ import ScheduleCard from './components/schedule-card/creator-view';
 // testing data
 import schedule from './data/schedule'
 import service from './data/service'
+import PublishScheduleCard from './components/schedule-card/publish-view';
 
 
 const theme = createTheme({
@@ -26,7 +27,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Header user={false} /> 
-        <ScheduleCard schedule={schedule} />
+        <PublishScheduleCard schedule={schedule}/>
         <ScheduleCard schedule={schedule} />
         <Routes>
           <Route path="/" element="" />

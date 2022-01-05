@@ -26,6 +26,7 @@ export default function ScheduleCard({ schedule }) {
         <CardMedia
           component="img"
           height="170"
+          padding="3"
           image={schedule.img}
           alt="schedule image"
         />

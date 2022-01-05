@@ -8,6 +8,7 @@ import CreateServicePage from './pages/create-service'
 import ServiceInfoPage from './pages/service-info'
 import PublishScheduleCard from './components/schedule-card/publish-view';
 import ScheduleCard from './components/schedule-card/creator-view';
+import TravelerProfile from './pages/profile/traveler-profile'
 
 // testing data
 import schedule from './data/schedule'
@@ -35,6 +36,17 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <Router>
+        <Header user={false} /> 
+        <TravelerProfile user={user}></TravelerProfile>
+        {/* <PublishScheduleCard schedule={schedule}/>
+        <ScheduleCard schedule={schedule} />
+        <ServiceCard service={service}></ServiceCard> */}
+        <Routes>
+          <Route path="/" element="" />
+        </Routes>
+      </Router>
+      
     </ThemeProvider>
   )
 }

@@ -15,13 +15,14 @@ const style = {
     alignItems: 'center',
     fontWeight: 'light',
     color: '#767676',
+    fontSize: 11,
     m: 1,
   },
 }
 
 export default function ScheduleCard({ schedule }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 320 }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -35,15 +36,15 @@ export default function ScheduleCard({ schedule }) {
           </Typography>
 
           <Box sx={{ display: 'flex', direction: 'row' }}>
-            <AvatarGroup max={4}>
+            <AvatarGroup max={3}>
               <Avatar
-                sx={{ width: 30, height: 30, bgcolor: 'secondary.main' }}
+                sx={{ width: 26, height: 26, bgcolor: 'secondary.main' }}
                 src="schedule.creators.avatar"
               >
                 H
               </Avatar>
               <Avatar
-                sx={{ width: 30, height: 30, bgcolor: 'primary.main' }}
+                sx={{ width: 26, height: 26, bgcolor: 'primary.main' }}
                 src="schedule.creators.avatar"
               >
                 V
@@ -52,22 +53,23 @@ export default function ScheduleCard({ schedule }) {
             <Box component="span" sx={style.dateStyle}>
               {schedule.startDate} - {schedule.endDate}
             </Box>
-
-            <Box sx={{ alignItems: 'center', marginLeft: 3 }}>
+            <Box sx={{ alignItems: 'center', marginLeft: 6}}>
               <IconButton>
-                {schedule.status == 'publish' ? (
-                  <LockOpen></LockOpen>
+                {schedule.status === 'publish' ? (
+                  <LockOpen fontSize="small"></LockOpen>
                 ) : (
                   <Lock></Lock>
                 )}
               </IconButton>
               <IconButton>
-                <MoreVertOutlined></MoreVertOutlined>
+                <MoreVertOutlined fontSize="small"></MoreVertOutlined>
               </IconButton>
             </Box>
+            
           </Box>
         </CardContent>
       </CardActionArea>
+     
     </Card>
   )
 }

@@ -1,5 +1,9 @@
 import './App.css'
 import Header from './components/Header/Header'
+import Footer from './components/footer/footer'
+import ReactCalendar from './components/calendar/calendar'
+
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ServiceCard from './components/service-card'
@@ -28,6 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element="" />
         </Routes>
+        <ReactCalendar/>
       </Router>
     </ThemeProvider>
   )

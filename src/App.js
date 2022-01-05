@@ -6,8 +6,11 @@ import ServiceCard from './components/service-card'
 import ServiceProviderProfilePage from './pages/profile/service-provider'
 import CreateServicePage from './pages/create-service'
 import ServiceInfoPage from './pages/service-info'
+import PublishScheduleCard from './components/schedule-card/publish-view';
+import ScheduleCard from './components/schedule-card/creator-view';
 
 // testing data
+import schedule from './data/schedule'
 import service from './data/service'
 import user from './data/user'
 
@@ -32,8 +35,6 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      {/* <ServiceProviderProfilePage user={user} /> */}
-      <ServiceInfoPage service={service} />
     </ThemeProvider>
   )
 }

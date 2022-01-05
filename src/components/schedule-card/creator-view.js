@@ -6,7 +6,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import { CardActionArea} from '@mui/material'
+import { CardActionArea, CardActions, IconButton } from '@mui/material'
 import { Lock, LockOpen, MoreVertOutlined } from '@mui/icons-material'
 
 const style = {
@@ -26,7 +26,6 @@ export default function ScheduleCard({ schedule }) {
         <CardMedia
           component="img"
           height="170"
-          padding="3"
           image={schedule.img}
           alt="schedule image"
         />
@@ -54,13 +53,17 @@ export default function ScheduleCard({ schedule }) {
               {schedule.startDate} - {schedule.endDate}
             </Box>
 
-            <Box sx={{ alignItems: 'center', marginLeft: 12 }}>
-              {schedule.status == 'publish' ? (
-                <LockOpen></LockOpen>
-              ) : (
-                <Lock></Lock>
-              )}
-              <MoreVertOutlined></MoreVertOutlined>
+            <Box sx={{ alignItems: 'center', marginLeft: 3 }}>
+              <IconButton>
+                {schedule.status == 'publish' ? (
+                  <LockOpen></LockOpen>
+                ) : (
+                  <Lock></Lock>
+                )}
+              </IconButton>
+              <IconButton>
+                <MoreVertOutlined></MoreVertOutlined>
+              </IconButton>
             </Box>
           </Box>
         </CardContent>

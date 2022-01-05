@@ -1,15 +1,27 @@
 import './App.css'
+<<<<<<< HEAD
 import Header from './components/Header/Header'
 import Footer from './components/footer/footer'
 import ReactCalendar from './components/calendar/calendar'
 
 
+=======
+import Header from './components/header/Header'
+>>>>>>> main
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 import ServiceCard from './components/service-card'
+import ServiceProviderProfilePage from './pages/profile/service-provider'
+import CreateServicePage from './pages/create-service'
+import ServiceInfoPage from './pages/service-info'
+import PublishScheduleCard from './components/schedule-card/publish-view';
+import ScheduleCard from './components/schedule-card/creator-view';
+import TravelerProfile from './pages/profile/traveler-profile'
 
 // testing data
+import schedule from './data/schedule'
 import service from './data/service'
+import user from './data/user'
 
 const theme = createTheme({
   spacing: 4,
@@ -20,6 +32,12 @@ const theme = createTheme({
     secondary: {
       main: '#125C13',
     },
+    light: {
+      main: '#767676',
+    },
+    dard: {
+      main: '#484848',
+    },
   },
 })
 
@@ -28,12 +46,16 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Header user={false} /> 
-        <ServiceCard service={service} />
+        <TravelerProfile user={user}></TravelerProfile>
+        {/* <PublishScheduleCard schedule={schedule}/>
+        <ScheduleCard schedule={schedule} />
+        <ServiceCard service={service}></ServiceCard> */}
         <Routes>
           <Route path="/" element="" />
         </Routes>
         <ReactCalendar/>
       </Router>
+      
     </ThemeProvider>
   )
 }

@@ -1,4 +1,4 @@
-const type = {
+export const type = {
   ACCOMMODATION: 'Accommodation',
   RESTAURANT: 'Restaurant',
   FLIGHT: 'Flight',

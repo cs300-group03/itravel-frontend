@@ -3,19 +3,44 @@ import {
   Box,
   InputBase,
   Button,
-  TextField,
   FormControl,
   InputAdornment,
   OutlinedInput,
+  Autocomplete,
+  TextField,
 } from '@mui/material'
-import IconButton from '@mui/material/IconButton'
-import FilledInput from '@mui/material/FilledInput'
-import InputLabel from '@mui/material/InputLabel'
-import FormHelperText from '@mui/material/FormHelperText'
-import Visibility from '@mui/icons-material/Visibility'
 import { LocationOn, AttachMoney } from '@mui/icons-material'
 
 import style from './style'
+import { type } from '../../data/service'
+
+const categories = [
+  { label: type.ACCOMMODATION },
+  { label: type.ATTRACTION },
+  { label: type.CAFES },
+  { label: type.FLIGHT },
+  { label: type.MOTOBIKE },
+  { label: type.RESTAURANT },
+  { label: type.TRAIN },
+]
+
+const FillForm = ({ icon, label }) => {
+  return (
+    <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
+      <OutlinedInput
+        color="secondary"
+        startAdornment={
+          <InputAdornment position="start">
+            {icon()}
+            <Box component="span" sx={style.detail}>
+              {label}
+            </Box>
+          </InputAdornment>
+        }
+      />
+    </FormControl>
+  )
+}
 
 const CreateServicePage = () => {
   return (
@@ -29,44 +54,14 @@ const CreateServicePage = () => {
         sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', m: 5 }}>
-          <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
-            <OutlinedInput
-              color="secondary"
-              startAdornment={
-                <InputAdornment position="start">
-                  <LocationOn
-                    sx={{
-                      color: 'secondary.main',
-                      fontSize: 24,
-                      marginRight: 3,
-                    }}
-                  />
-                  <Box component="span" sx={style.detail}>
-                    Location
-                  </Box>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-          <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
-            <OutlinedInput
-              color="secondary"
-              startAdornment={
-                <InputAdornment position="start">
-                  <AttachMoney
-                    sx={{
-                      color: 'secondary.main',
-                      fontSize: 24,
-                      marginRight: 3,
-                    }}
-                  />
-                  <Box component="span" sx={style.detail}>
-                    Price
-                  </Box>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
+          <FillForm
+            label={'Location'}
+            icon={() => <LocationOn sx={style.icon} />}
+          />
+          <FillForm
+            label={'Price'}
+            icon={() => <AttachMoney sx={style.icon} />}
+          />
           <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
             <OutlinedInput
               color="secondary"
@@ -83,18 +78,38 @@ const CreateServicePage = () => {
           </FormControl>
         </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', m: 5 }}>
-          <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
-            <OutlinedInput
-              color="secondary"
-              startAdornment={
-                <InputAdornment position="start">
-                  <Box component="span" sx={style.detail}>
-                    Category
-                  </Box>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
+          <Autocomplete
+            options={categories}
+            sx={{ mx: 5, mb: 5, width: 400 }}
+            autoHighlight
+            getOptionLabel={(option) => option.label}
+            renderOption={(props, option) => (
+              <Box
+                component="li"
+                // sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                {...props}
+              >
+                {option.label}
+              </Box>
+            )}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                color="secondary"
+                InputProps={{
+                  ...params.InputProps,
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Box component="span" sx={style.detail}>
+                        Category
+                      </Box>
+                    </InputAdornment>
+                  ),
+                }}
+                variant="outlined"
+              />
+            )}
+          />
         </Box>
       </Box>
       <Box>

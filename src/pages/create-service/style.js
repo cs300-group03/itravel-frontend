@@ -10,6 +10,11 @@ const style = {
     color: 'secondary.main',
     mt: 5,
   },
+  icon: {
+    color: 'secondary.main',
+    fontSize: 24,
+    marginRight: 3,
+  },
   detail: {
     fontWeight: 'medium',
     fontSize: 18,

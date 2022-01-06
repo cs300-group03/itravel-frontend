@@ -3,13 +3,14 @@ import {
   Box,
   Button,
   TextField,
-  Link,
+  Link
 } from '@mui/material'
 import PlanTrip from '../../assets/plan-trip.png'
 import style from './style'
 import DateRangePicker from '@mui/lab/DateRangePicker'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
+import { Link as LinkRoute } from 'react-router-dom'
 
 const CreateSchedulePage = () => {
   // const classes = useStyles()
@@ -64,9 +65,9 @@ const CreateSchedulePage = () => {
                 }}
                 renderInput={(startProps, endProps) => (
                   <React.Fragment>
-                    <TextField {...startProps} label="Start date" color="secondary" sx={{width: 236}}/>
+                    <TextField {...startProps} label="Start date" color="secondary" sx={{width: 237}}/>
                     <Box sx={{ mx: 2 }}> to </Box>
-                    <TextField {...endProps} label="End date" color="secondary" sx={{width: 236}} />
+                    <TextField {...endProps} label="End date" color="secondary" sx={{width: 237}} />
                   </React.Fragment>
                 )}
               />
@@ -86,10 +87,12 @@ const CreateSchedulePage = () => {
             + Invite collaboration
           </Link>
           <Button
+            component={LinkRoute}
             variant="contained"
             color="secondary"
             size="large"
             sx={style.button}
+            to="/schedule"
           >
             Create schedule
           </Button>

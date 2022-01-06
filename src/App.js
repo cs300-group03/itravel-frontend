@@ -42,6 +42,7 @@ function App() {
         <Routes>
           <Route path="/" element={<TravelerProfile user={user} />} />
           <Route path="/create-schedule" element={<CreateSchedulePage />} />
+          <Route path="/schedule" element={<SchedulePage schedule={schedule}/>}/>
         </Routes>
       </Router>
     </ThemeProvider>

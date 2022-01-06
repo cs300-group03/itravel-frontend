@@ -23,7 +23,7 @@ import { Main, AppBar, DrawerHeader } from './elements'
 
 const drawerWidth = 290
 
-export default function SchedulePage({schedule}) {
+export default function SchedulePage({ schedule }) {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
 

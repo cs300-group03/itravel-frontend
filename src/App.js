@@ -16,6 +16,7 @@ import LoginPage from './pages/login'
 import schedule from './data/schedule'
 import service from './data/service'
 import user from './data/user'
+import SchedulePage from './pages/schedule-page'
 
 const theme = createTheme({
   spacing: 4,
@@ -41,6 +42,10 @@ function App() {
         <Header user={true} />
         {/* <ServiceInfoPage service={service} /> */}
         <CreateServicePage />
+        <SchedulePage schedule={schedule} />
+        {/* <PublishScheduleCard schedule={schedule}/>
+        <ScheduleCard schedule={schedule} />
+        <ServiceCard service={service}></ServiceCard> */}
         <Routes>
           <Route path="/" element="" />
         </Routes>

@@ -47,15 +47,7 @@ const CreateServicePage = () => {
     <Box sx={style.container} component="form" noValidate autoComplete="off">
       <InputBase
         fullWidth
-        sx={{
-          fontWeight: 'bold',
-          fontSize: 36,
-          color: 'secondary.main',
-          mt: 5,
-          '& input': {
-            textAlign: 'center',
-          },
-        }}
+        sx={style.title}
         textAlign="center"
         placeholder="Enter Service Name"
         // inputProps={{ 'aria-label': 'search google maps' }}

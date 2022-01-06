@@ -9,7 +9,9 @@ const style = {
     fontSize: 36,
     color: 'secondary.main',
     mt: 5,
-    justifyContent: 'center',
+    '& input': {
+      textAlign: 'center',
+    },
   },
   icon: {
     color: 'secondary.main',

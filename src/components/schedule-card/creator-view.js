@@ -8,6 +8,8 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { CardActionArea, CardActions, IconButton } from '@mui/material'
 import { Lock, LockOpen, MoreVertOutlined } from '@mui/icons-material'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 
 const style = {
   dateStyle: {
@@ -21,6 +23,15 @@ const style = {
 }
 
 export default function ScheduleCard({ schedule }) {
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   return (
     <Card sx={{ maxWidth: 320 }}>
       <CardActionArea>
@@ -53,7 +64,8 @@ export default function ScheduleCard({ schedule }) {
             <Box component="span" sx={style.dateStyle}>
               {schedule.startDate} - {schedule.endDate}
             </Box>
-            <Box sx={{ alignItems: 'center', marginLeft: 6}}>
+          
+            <Box sx={{ alignItems: 'center', marginLeft: 6 }}>
               <IconButton>
                 {schedule.status === 'publish' ? (
                   <LockOpen fontSize="small"></LockOpen>
@@ -61,15 +73,31 @@ export default function ScheduleCard({ schedule }) {
                   <Lock></Lock>
                 )}
               </IconButton>
-              <IconButton>
+              <IconButton
+                id="basic-button"
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+              >
                 <MoreVertOutlined fontSize="small"></MoreVertOutlined>
               </IconButton>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                }}
+              >
+                <MenuItem onClick={handleClose}>Delete</MenuItem>
+                <MenuItem onClick={handleClose}>Share</MenuItem>
+              </Menu>
             </Box>
-            
           </Box>
         </CardContent>
       </CardActionArea>
-     
     </Card>
   )
 }

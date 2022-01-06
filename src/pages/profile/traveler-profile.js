@@ -1,10 +1,10 @@
 import React from 'react'
 import { Box, Button } from '@mui/material'
-import Grid from '@mui/material/Grid'
 import { Add } from '@mui/icons-material'
 import style from './service-provider/style'
 import ScheduleCard from '../../components/schedule-card/creator-view'
 import schedule from '../../data/schedule'
+import { Link } from 'react-router-dom';
 import './style.css'
 
 const schedules = [schedule, schedule, schedule, schedule]
@@ -13,9 +13,16 @@ const TravelerProfile = ({ user }) => {
   // const scheduleList = user.schedules.map((schedule) => (
   //   <ScheduleCard schedule={schedule} />
   // ))
+
   return (
     <Box sx={style.container}>
-      <Button variant="contained" startIcon={<Add />} sx={style.createButton}>
+      <Button 
+      variant="contained" 
+      startIcon={<Add />} 
+      sx={style.createButton} 
+      component = {Link} 
+      to="/create-schedule"
+      >
         Create new schedule
       </Button>
       <Box

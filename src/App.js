@@ -38,15 +38,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Header user={true} />
-        {/* <ServiceInfoPage service={service} /> */}
-        <CreateSchedulePage/>
-        {/* <SchedulePage schedule={schedule} /> */}
-        {/* <PublishScheduleCard schedule={schedule}/>
-        <ScheduleCard schedule={schedule} />
-        <ServiceCard service={service}></ServiceCard> */}
+        <Header user ={true}></Header>
         <Routes>
-          <Route path="/" element="" />
+          <Route path="/" element={<TravelerProfile user={user} />} />
+          <Route path="/create-schedule" element={<CreateSchedulePage />} />
         </Routes>
       </Router>
     </ThemeProvider>

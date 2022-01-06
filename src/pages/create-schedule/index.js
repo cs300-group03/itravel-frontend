@@ -64,9 +64,9 @@ const CreateSchedulePage = () => {
                 }}
                 renderInput={(startProps, endProps) => (
                   <React.Fragment>
-                    <TextField {...startProps} label="Start date" color="secondary" sx={{width: 236}}/>
+                    <TextField {...startProps} label="Start date" color="secondary" sx={{width: 237}}/>
                     <Box sx={{ mx: 2 }}> to </Box>
-                    <TextField {...endProps} label="End date" color="secondary" sx={{width: 236}} />
+                    <TextField {...endProps} label="End date" color="secondary" sx={{width: 237}} />
                   </React.Fragment>
                 )}
               />

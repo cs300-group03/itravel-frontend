@@ -14,6 +14,9 @@ import ScheduleCalendar from './components/schedule-calendar';
 import schedule from './data/schedule'
 import service from './data/service'
 import user from './data/user'
+import SchedulePage from './pages/schedule-page'
+
+
 
 const theme = createTheme({
   spacing: 4,
@@ -37,8 +40,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Header user={true} /> 
-        <ScheduleCalendar/>
+        <SchedulePage schedule={schedule}/>
         {/* <PublishScheduleCard schedule={schedule}/>
         <ScheduleCard schedule={schedule} />
         <ServiceCard service={service}></ServiceCard> */}

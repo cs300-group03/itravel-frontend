@@ -14,7 +14,7 @@ export const weekDayName = {
 };
 
 export const container = {
-  paddingRight: '10em',
+  paddingRight: '5em',
   paddingTop: '4em',
   paddingBottom: '2em',
 };

@@ -43,11 +43,6 @@ const Section = styled.section`
     gap: 1rem;
     padding: 1rem;
     background-color: white;
-    transition: 0.3s ease-in-out;
-    &:hover {
-      transform: translateX(0.4rem) translateY(-0.4rem);
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
-    }
     .icon {
       img {
         height: 5rem;

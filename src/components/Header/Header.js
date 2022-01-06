@@ -55,7 +55,7 @@ const authenOption = (
   </>
 )
 
-const Header = ({ user }) => {
+const Header = ({ user = true }) => {
   return (
     <div className="header">
       <Link to="/" className="header-logo" color="neutral">

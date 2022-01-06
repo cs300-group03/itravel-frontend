@@ -20,19 +20,28 @@ import { Button } from '@mui/material'
 import SearchAttraction from '../../components/searchbox/search-attraction'
 import SearchService from '../../components/searchbox/search-service'
 import { Main, AppBar, DrawerHeader } from './elements'
+import PublishAlertDialog from '../../components/dialog/publish-dialog'
 
 const drawerWidth = 290
 
 export default function SchedulePage({ schedule }) {
   const theme = useTheme()
   const [open, setOpen] = React.useState(false)
-
+  const [openPublishDialog, setOpenPublishDialog] = React.useState(false)
   const handleDrawerOpen = () => {
     setOpen(true)
   }
 
   const handleDrawerClose = () => {
     setOpen(false)
+  }
+
+  const handleOpenDialog = () => {
+    setOpenPublishDialog(true)
+  }
+
+  const handleDialogClose = () => {
+    setOpenPublishDialog(false)
   }
 
   return (
@@ -52,7 +61,10 @@ export default function SchedulePage({ schedule }) {
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             {schedule.title}
           </Typography>
-          <Button color="inherit">Publish</Button>
+          <Button onClick={handleOpenDialog} color="inherit">
+            Publish
+          </Button>
+          <PublishAlertDialog open={openPublishDialog} handleClose={handleDialogClose} />
           <Button color="inherit" sx={{ mr: 2 }}>
             Share
           </Button>

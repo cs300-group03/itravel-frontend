@@ -10,12 +10,12 @@ import PublishScheduleCard from './components/schedule-card/publish-view'
 import ScheduleCard from './components/schedule-card/creator-view'
 import TravelerProfile from './pages/profile/traveler-profile'
 import ScheduleCalendar from './components/schedule-calendar/schedule-calendar'
+import LoginPage from './pages/login'
 
 // testing data
 import schedule from './data/schedule'
 import service from './data/service'
 import user from './data/user'
-import LoginPage from './pages/login'
 
 const theme = createTheme({
   spacing: 4,

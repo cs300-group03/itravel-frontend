@@ -16,7 +16,9 @@
     display: flex;
     direction: row;
     align-items: center;
-    color: white;
+    color:white;
+    font-size: 35px;
+    font-family:'Gill Sans';
 }
 
 .header-logo img {
@@ -31,7 +33,7 @@
 }
 
 .header-menu a {
-    font-size: 25px;
+    font-size: 20px;
     color: white;
     text-decoration: none;
     font-family: Poppins;

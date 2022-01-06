@@ -3,7 +3,7 @@ import { Input, Space } from 'antd';
 const { Search } = Input;
 const onSearch = value => console.log(value);
 
-const SearchAttraction = () => {
+const SearchService = () => {
     return (
         <Space direction="vertical">
             <Search placeholder="Enter service" allowClear onSearch={onSearch}  />
@@ -11,4 +11,4 @@ const SearchAttraction = () => {
     )
 }
 
-export default SearchAttraction
+export default SearchService

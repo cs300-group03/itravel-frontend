@@ -1,6 +1,6 @@
 import service from './service'
 
-const type = {
+export const type = {
   TRAVELLER: 'Traveller',
   SERVICE_PROVIDER: 'Service Provider',
 }

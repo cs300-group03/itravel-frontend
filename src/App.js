@@ -1,6 +1,10 @@
 import './App.css'
 import Header from './components/header/Header'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import ServiceCard from './components/service-card'
 import ServiceProviderProfilePage from './pages/profile/service-provider'
@@ -11,6 +15,7 @@ import ScheduleCard from './components/schedule-card/creator-view'
 import TravelerProfile from './pages/profile/traveler-profile'
 import ScheduleCalendar from './components/schedule-calendar/schedule-calendar'
 import LoginPage from './pages/login'
+import { type as user_type } from './data/user'
 
 // testing data
 import schedule from './data/schedule'
@@ -38,15 +43,30 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Header user ={true}></Header>
+         <Header user={true}/> 
         <Routes>
-          <Route path="/" element={<TravelerProfile user={user} />} />
+          <Route exact path="/" element={<LoginPage />} /> {/*temp*/}
+          {/* <Route
+            path="/profile"
+            element={
+              user.type === user_type.TRAVELLER ? (
+                <TravelerProfile user={user} />
+              ) : (
+                <ServiceProviderProfilePage user={user} />
+              )
+            }
+          />
           <Route path="/create-schedule" element={<CreateSchedulePage />} />
           <Route path="/schedule" element={<SchedulePage schedule={schedule}/>}/>
+          <Route path="/create-service" element={<CreateServicePage />} />
+          <Route
+            path="/service/service-id"
+            element={<ServiceInfoPage service={service} />}
+          /> */}
         </Routes>
       </Router>
     </ThemeProvider>
   )
 }
 
-export default App
+export default App();

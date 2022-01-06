@@ -24,8 +24,8 @@ const style = {
   title: {
     fontSize: 24,
     fontWeight: 'medium',
-    color: 'secondary.main',
     marginBottom: 5,
+    ':hover': { color: 'secondary.main' },
   },
   descriptionContainer: {
     display: 'flex',

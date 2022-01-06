@@ -21,6 +21,7 @@ import { type as user_type } from './data/user'
 import schedule from './data/schedule'
 import service from './data/service'
 import user from './data/user'
+import { type as user_type } from './data/user'
 import SchedulePage from './pages/schedule-page'
 import CreateSchedulePage from './pages/create-schedule'
 
@@ -50,6 +51,13 @@ function App() {
             path="/profile"
             element={
               user.type === user_type.TRAVELLER ? (
+        <Header user={true} />
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route
+            path="/profile"
+            element={
+              user.type == user_type.TRAVELLER ? (
                 <TravelerProfile user={user} />
               ) : (
                 <ServiceProviderProfilePage user={user} />
@@ -63,6 +71,7 @@ function App() {
             path="/service/service-id"
             element={<ServiceInfoPage service={service} />}
           /> */}
+          />
         </Routes>
       </Router>
     </ThemeProvider>

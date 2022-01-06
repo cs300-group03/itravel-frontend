@@ -9,7 +9,7 @@ import ServiceInfoPage from './pages/service-info'
 import PublishScheduleCard from './components/schedule-card/publish-view';
 import ScheduleCard from './components/schedule-card/creator-view';
 import TravelerProfile from './pages/profile/traveler-profile'
-import ScheduleCalendar from './components/schedule-calendar/schedule-calendar';
+import ScheduleCalendar from './components/schedule-calendar';
 // testing data
 import schedule from './data/schedule'
 import service from './data/service'

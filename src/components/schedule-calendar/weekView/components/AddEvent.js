@@ -9,7 +9,7 @@ function AddEvent (props) {
   return (
     <React.Fragment>
       <Input
-        type="text"
+        
         placeholder="Add Title"
         value={props.title}
         style={inputStyles}

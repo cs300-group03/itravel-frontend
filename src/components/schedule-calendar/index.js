@@ -1,3 +1,3 @@
-import GoogleCalendar from './GoogleCalendar';
+import ScheduleCalendar from "./schedule-calendar";
 
-export default GoogleCalendar;
+export default ScheduleCalendar;

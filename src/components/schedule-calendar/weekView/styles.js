@@ -9,7 +9,7 @@ export const weekDayName = {
   fontSize: 12,
   lineHeight: '32px',
   textTransform: 'capitalize',
-  color: '#757575',
+  color: '#125C13',
   marginLeft: 10,
 };
 
@@ -22,7 +22,7 @@ export const container = {
 export const weekDates = {
   fontSize: 40,
   lineHeight: '12px',
-  color: '#9e9e9e',
+  color: '#125C13',
   marginLeft: 10,
 };
 
@@ -32,7 +32,7 @@ export const slot = {
 };
 export const timeCol = {
   fontSize: 10,
-  color: '#212121',
+  color: '#125C13',
   textAlign: 'right',
   padding: 6,
 };
@@ -90,8 +90,8 @@ export const lightHighlighter = {
 
 export const eventHighlighter = {
   position: 'absolute',
-  backgroundColor: '#b3e1f7',
-  border: '1px solid #81cdf2',
+  backgroundColor: '#F4A442',
+  border: '1px solid #F4A442',
   borderRadius: '4px',
   color: 'white',
   padding: '2px 4px',

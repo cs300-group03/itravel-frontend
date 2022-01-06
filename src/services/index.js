@@ -1,9 +1,8 @@
 import * as status from 'http-status';
 
-export async function getProfile(token) {
-    if (!token) {
-        token = localStorage.getItem('token');
-    }
+export async function getProfile() {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
     try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/user/`, {
             headers: {

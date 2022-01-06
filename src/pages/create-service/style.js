@@ -9,6 +9,7 @@ const style = {
     fontSize: 36,
     color: 'secondary.main',
     mt: 5,
+    justifyContent: 'center',
   },
   icon: {
     color: 'secondary.main',

@@ -103,6 +103,7 @@ const ServiceInfoPage = ({ service }) => {
             color: '#ffffff',
             borderRadius: 15,
             paddingX: 20,
+            mb: 25,
           }}
         >
           Book Now!

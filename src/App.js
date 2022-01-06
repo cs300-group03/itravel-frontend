@@ -39,11 +39,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Header user={true} />
-        {/* <ScheduleCalendar /> */}
-        {/* <PublishScheduleCard schedule={schedule} /> */}
-        {/* <ScheduleCard schedule={schedule} /> */}
-        {/* <ServiceCard service={service}></ServiceCard> */}
-        <LoginPage />
+        {/* <ServiceInfoPage service={service} /> */}
+        <CreateServicePage />
         <Routes>
           <Route path="/" element="" />
         </Routes>

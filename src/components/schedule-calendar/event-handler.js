@@ -16,23 +16,10 @@ const CalendarEventHandler = (function () {
     return {...allEvents};
   }
 
-  /**
-   * Generate unique id for an event
-   * @param {timeStamp} start - Start timestamp of the event
-   * @param {timeStamp} end - End timeStamp of the event
-   * @params {string} title - Title of the event
-   * @returns {string} id - Unique id
-  */
   function generateUniqueId({start, title, end}) {
     return start + title + end;
   }
 
-  /**
-   * Deletes event from the list
-   * @param {string} eventId - Id of the event to be deleted
-   * @param {arr} allEvents - Array of all the events
-   * @returns {Object} allEvents - A new object reference for all events
-  */
   function deleteEvent (eventId, allEvents) {
     Object.keys (allEvents).forEach (time => {
       allEvents[time] = allEvents[time].filter (event => event.id !== eventId);
@@ -40,13 +27,6 @@ const CalendarEventHandler = (function () {
     return {...allEvents};
   }
 
-  /**
-   * Updates an event from the list
-   * @param {string} eventId - Id of the event to be deleted
-   * @param {Object} updatedEvent - Event objects with the updated data
-   * @param {arr} allEvents - Array of all the events
-   * @returns {Object} allEvents - A new object reference for all events
-  */
   function updateEvent (eventId, updatedEvent, allEvents) {
     Object.keys (allEvents).forEach (time => {
       allEvents[time] = allEvents[time].map (

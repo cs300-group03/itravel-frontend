@@ -9,7 +9,7 @@ import ServiceInfoPage from './pages/service-info'
 import PublishScheduleCard from './components/schedule-card/publish-view';
 import ScheduleCard from './components/schedule-card/creator-view';
 import TravelerProfile from './pages/profile/traveler-profile'
-
+import ScheduleCalendar from './components/schedule-calendar/schedule-calendar';
 // testing data
 import schedule from './data/schedule'
 import service from './data/service'
@@ -37,8 +37,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Header user={false} /> 
-        <TravelerProfile user={user}></TravelerProfile>
+        <Header user={true} /> 
+        <ScheduleCalendar/>
         {/* <PublishScheduleCard schedule={schedule}/>
         <ScheduleCard schedule={schedule} />
         <ServiceCard service={service}></ServiceCard> */}
@@ -46,7 +46,6 @@ function App() {
           <Route path="/" element="" />
         </Routes>
       </Router>
-      
     </ThemeProvider>
   )
 }

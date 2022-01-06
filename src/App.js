@@ -15,21 +15,21 @@ import ScheduleCalendar from './components/schedule-calendar/schedule-calendar'
 import schedule from './data/schedule'
 import service from './data/service'
 import user from './data/user'
+import LoginPage from './pages/login'
 
 const theme = createTheme({
   spacing: 4,
   palette: {
     primary: {
       main: '#F4A442',
+      light: '#ffffff',
     },
     secondary: {
       main: '#125C13',
+      light: '#ffffff',
     },
-    light: {
-      main: '#767676',
-    },
-    dard: {
-      main: '#484848',
+    neutral: {
+      main: '#ffffff',
     },
   },
 })
@@ -43,6 +43,7 @@ function App() {
         {/* <PublishScheduleCard schedule={schedule} /> */}
         {/* <ScheduleCard schedule={schedule} /> */}
         {/* <ServiceCard service={service}></ServiceCard> */}
+        <LoginPage />
         <Routes>
           <Route path="/" element="" />
         </Routes>

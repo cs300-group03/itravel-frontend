@@ -17,17 +17,16 @@ import schedule from './data/schedule'
 import service from './data/service'
 import user from './data/user'
 import SchedulePage from './pages/schedule-page'
+import CreateSchedulePage from './pages/create-schedule'
 
 const theme = createTheme({
   spacing: 4,
   palette: {
     primary: {
       main: '#F4A442',
-      light: '#ffffff',
     },
     secondary: {
       main: '#125C13',
-      light: '#ffffff',
     },
     neutral: {
       main: '#ffffff',
@@ -41,8 +40,8 @@ function App() {
       <Router>
         <Header user={true} />
         {/* <ServiceInfoPage service={service} /> */}
-        <CreateServicePage />
-        <SchedulePage schedule={schedule} />
+        <CreateSchedulePage/>
+        {/* <SchedulePage schedule={schedule} /> */}
         {/* <PublishScheduleCard schedule={schedule}/>
         <ScheduleCard schedule={schedule} />
         <ServiceCard service={service}></ServiceCard> */}

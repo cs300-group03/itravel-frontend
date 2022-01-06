@@ -1,28 +1,6 @@
 import React from 'react'
-import {
-  Box,
-  Avatar,
-  InputBase,
-  Button,
-  FormControl,
-  InputAdornment,
-  OutlinedInput,
-  Autocomplete,
-  TextField,
-  Rating,
-} from '@mui/material'
-import {
-  Bed,
-  Place,
-  Attractions,
-  LocalCafe,
-  Restaurant,
-  Flight,
-  TwoWheeler,
-  Train,
-  LocationOn,
-  AttachMoney,
-} from '@mui/icons-material'
+import { Box, Avatar, Button, Rating } from '@mui/material'
+import { LocationOn, AttachMoney } from '@mui/icons-material'
 import style from './style'
 import { type, getIcon } from '../../data/service'
 
@@ -125,6 +103,7 @@ const ServiceInfoPage = ({ service }) => {
             color: '#ffffff',
             borderRadius: 15,
             paddingX: 20,
+            mb: 25,
           }}
         >
           Book Now!

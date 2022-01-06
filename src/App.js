@@ -6,29 +6,30 @@ import ServiceCard from './components/service-card'
 import ServiceProviderProfilePage from './pages/profile/service-provider'
 import CreateServicePage from './pages/create-service'
 import ServiceInfoPage from './pages/service-info'
-import PublishScheduleCard from './components/schedule-card/publish-view';
-import ScheduleCard from './components/schedule-card/creator-view';
+import PublishScheduleCard from './components/schedule-card/publish-view'
+import ScheduleCard from './components/schedule-card/creator-view'
 import TravelerProfile from './pages/profile/traveler-profile'
-import ScheduleCalendar from './components/schedule-calendar';
+import ScheduleCalendar from './components/schedule-calendar/schedule-calendar'
+
 // testing data
 import schedule from './data/schedule'
 import service from './data/service'
 import user from './data/user'
+import LoginPage from './pages/login'
 
 const theme = createTheme({
   spacing: 4,
   palette: {
     primary: {
       main: '#F4A442',
+      light: '#ffffff',
     },
     secondary: {
       main: '#125C13',
+      light: '#ffffff',
     },
-    light: {
-      main: '#767676',
-    },
-    dard: {
-      main: '#484848',
+    neutral: {
+      main: '#ffffff',
     },
   },
 })
@@ -37,11 +38,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Header user={true} /> 
-        <ScheduleCalendar/>
-        {/* <PublishScheduleCard schedule={schedule}/>
-        <ScheduleCard schedule={schedule} />
-        <ServiceCard service={service}></ServiceCard> */}
+        <Header user={true} />
+        {/* <ServiceInfoPage service={service} /> */}
+        <CreateServicePage />
         <Routes>
           <Route path="/" element="" />
         </Routes>

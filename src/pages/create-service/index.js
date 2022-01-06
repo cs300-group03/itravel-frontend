@@ -46,7 +46,9 @@ const CreateServicePage = () => {
   return (
     <Box sx={style.container} component="form" noValidate autoComplete="off">
       <InputBase
+        fullWidth
         sx={style.title}
+        textAlign="center"
         placeholder="Enter Service Name"
         // inputProps={{ 'aria-label': 'search google maps' }}
       />
@@ -120,6 +122,7 @@ const CreateServicePage = () => {
             fontFamily: 'Poppins',
             textTransform: 'none',
             color: '#ffffff',
+            fontSize: 24,
             borderRadius: 15,
             paddingX: 20,
           }}

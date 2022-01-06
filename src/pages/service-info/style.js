@@ -3,6 +3,8 @@ const style = {
     alignContent: 'center',
     display: 'flex',
     flexDirection: 'column',
+    // my: 15,
+    // paddingVertical: 15,
     // alignItems: 'center',
   },
   imageContainer: {

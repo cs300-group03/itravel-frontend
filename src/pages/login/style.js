@@ -20,11 +20,14 @@ const style = {
     borderRadius: 5,
     padding: 3,
   },
-  inputContainer: { m: 2, width: 355, height: 55 },
+  inputContainer: { 
+    m: 2, 
+    width: 355, 
+    height: 55,
+  },
   button: {
     fontFamily: 'Poppins',
     textTransform: 'none',
-    color: '#ffffff',
     borderRadius: 2,
     width: 355,
     height: 50,

@@ -16,17 +16,62 @@ import FormHelperText from '@mui/material/FormHelperText'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import Travel from '../../assets/travel.png'
 import style from './style'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import ErrorAlert from '../../components/error-alert';
+import { logIn } from '../../services';
+import { setUser, setUserEmail } from '../../store/auth';
 
 const LoginPage = () => {
   // const classes = useStyles()
 
   const [values, setValues] = React.useState({
+    email: '',
     amount: '',
     password: '',
     weight: '',
     weightRange: '',
     showPassword: false,
-  })
+  });
+
+  const defaultEmail = useSelector((state) => state.auth.user.email);
+  const [trash, setTrash] = React.useState(null);
+  const [loginError, setLoginError] = React.useState('');
+  const [loginRequest, setLoginRequest] = React.useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    setValues({...values, email: defaultEmail});
+    dispatch(setUserEmail(''));
+  }, [trash]);
+
+  React.useEffect(() => {
+    async function loginFunc() {
+      const response = await logIn(values.email, values.password);
+      if (response.message) {
+        setLoginError(response.message);
+      } else {
+        dispatch(setUser(response));
+        console.log(response);
+        console.log(localStorage.getItem('token'));
+        navigate('/');
+      }
+    }
+    if (values.email && values.password) {
+      loginFunc();
+    }
+  }, [loginRequest]);
+
+  const requestLogin = () => {
+    if (!values.email) {
+      setLoginError('Please enter email.');
+    } else if (!values.password) {
+      setLoginError('Please enter password.');
+    } else {
+      setLoginRequest(!loginRequest);
+    }
+  }
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value })
@@ -43,8 +88,17 @@ const LoginPage = () => {
     event.preventDefault()
   }
 
+  const signUp = () => {
+    navigate('/signup');
+  }
+
+  const verifyAnother = () => {
+    navigate('/verify');
+  }
+
   return (
     <Box sx={style.container}>
+      <ErrorAlert errorMessage={loginError} setErrorMessage={setLoginError}/>
       <Box sx={style.imageContainer}>
         <Box
           component="img"
@@ -65,9 +119,10 @@ const LoginPage = () => {
         <Box sx={style.loginContainer}>
           <TextField
             sx={style.inputContainer}
-            label="Username"
+            label="Email"
             variant="outlined"
             color="secondary"
+            onChange={handleChange('email')}
           />
           <FormControl sx={style.inputContainer} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password" color="secondary">
@@ -99,6 +154,7 @@ const LoginPage = () => {
             color="secondary"
             size="large"
             sx={style.button}
+            onClick={requestLogin}
           >
             Login
           </Button>
@@ -123,12 +179,22 @@ const LoginPage = () => {
             }}
           />
           <Button
-            variant="contained"
+            variant="outlined"
             color="primary"
             size="large"
             sx={style.button}
+            onClick={signUp}
           >
-            Creat a New Account
+            Create a New Account
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            size="large"
+            sx={style.button}
+            onClick={verifyAnother}
+          >
+            Verify an exising account
           </Button>
         </Box>
       </Box>

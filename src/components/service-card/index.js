@@ -1,8 +1,9 @@
 import React from 'react'
-import { Box, IconButton } from '@mui/material'
+import { Box, IconButton, Link } from '@mui/material'
 import style from './style'
 import { type, getIcon } from '../../data/service'
 import { MoreHoriz, Place, AttachMoney } from '@mui/icons-material'
+import { Link as RouterLink } from 'react-router-dom'
 
 const ServiceCard = ({ service }) => {
   let _icon = getIcon({ serviceType: service.type, m: 5, s: 36 })
@@ -18,9 +19,15 @@ const ServiceCard = ({ service }) => {
         }}
       >
         <Box sx={style.textContainer}>
-          <Box component="span" sx={style.title}>
+          <Link
+            component={RouterLink}
+            to="/service/service-id"
+            underline="hover"
+            color="secondary"
+            sx={style.title}
+          >
             {service.name}
-          </Box>
+          </Link>
           <Box sx={style.descriptionContainer}>
             <Place sx={style.icon} />
             <Box component="span" sx={style.description}>

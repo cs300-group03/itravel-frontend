@@ -1,8 +1,9 @@
 import React from 'react'
-import { Box, Avatar, Button, Rating } from '@mui/material'
+import { Box, Avatar, Button, Rating, Link } from '@mui/material'
 import { LocationOn, AttachMoney } from '@mui/icons-material'
 import style from './style'
 import { type, getIcon } from '../../data/service'
+import { Link as RouterLink } from 'react-router-dom'
 
 const ServiceInfoPage = ({ service }) => {
   let _icon = getIcon({

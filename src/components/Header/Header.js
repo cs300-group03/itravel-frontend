@@ -34,7 +34,7 @@ const authenOption = (
     </div>
 
     <div className="header-right">
-      <Link className="header-info" to="/profile-page">
+      <Link className="header-info" to="/profile">
         <Avatar src="https://icdn.dantri.com.vn/2017/emma-watson-5-1488809769584.jpg" />
         <h4> Emma Watson </h4>
       </Link>

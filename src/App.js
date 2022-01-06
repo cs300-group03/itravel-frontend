@@ -41,9 +41,9 @@ function App() {
       <Router>
         <Header user={true} />
         <Routes>
-          <Route path="/" element="" />
+          <Route path="/" element={<LoginPage />} />
           <Route
-            path="/profile-page"
+            path="/profile"
             element={
               user.type == user_type.TRAVELLER ? (
                 <TravelerProfile user={user} />
@@ -51,6 +51,11 @@ function App() {
                 <ServiceProviderProfilePage user={user} />
               )
             }
+          />
+          <Route path="/create-service" element={<CreateServicePage />} />
+          <Route
+            path="/service/service-id"
+            element={<ServiceInfoPage service={service} />}
           />
         </Routes>
       </Router>

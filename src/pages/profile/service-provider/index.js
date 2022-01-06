@@ -3,6 +3,7 @@ import { Box, Button } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import ServiceCard from '../../../components/service-card'
 import style from './style'
+import { Link } from 'react-router-dom'
 
 const ServiceProviderProfilePage = ({ user }) => {
   const serviceList = user.services.map((service) => (
@@ -10,7 +11,13 @@ const ServiceProviderProfilePage = ({ user }) => {
   ))
   return (
     <Box sx={style.container}>
-      <Button variant="contained" startIcon={<Add />} sx={style.createButton}>
+      <Button
+        variant="contained"
+        startIcon={<Add />}
+        component={Link}
+        sx={style.createButton}
+        to="/create-service"
+      >
         Create new service
       </Button>
       <Box

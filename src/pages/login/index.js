@@ -65,7 +65,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    setValues({...values, email: defaultEmail});
+    setValues({...values, email: defaultEmail });
     dispatch(setUserEmail(''));
   }, [trash]);
 

@@ -5,6 +5,7 @@ const scheduleSlice = createSlice({
     initialState: {
         currentSchedule: '',
         mySchedules: [], // Complete schedules, not just ID. List of ID is in state.auth.user.schedules
+        filteredSchedules: [],
     },
     reducers: {
         setCurrentSchedule: (state, action) => {
@@ -17,10 +18,13 @@ const scheduleSlice = createSlice({
             state.mySchedules.push(action.payload);
         },
         concatSchedules: (state, action) => {
-            state.mySchedules.concat(action.payload);
+            state.mySchedules = state.mySchedules.concat(action.payload);
+        },
+        setFilteredSchedules: (state, action) => {
+            state.filteredSchedules = action.payload;
         }
     },
 });
 
-export const { setCurrentSchedule, setSchedules, appendSchedule, concatSchedules } = scheduleSlice.actions;
+export const { setCurrentSchedule, setSchedules, appendSchedule, concatSchedules, setFilteredSchedules } = scheduleSlice.actions;
 export const scheduleReducer = scheduleSlice.reducer;

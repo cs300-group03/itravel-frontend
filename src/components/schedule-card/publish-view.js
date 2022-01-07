@@ -6,9 +6,16 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import { CardActionArea, CardActions } from '@mui/material'
+import { CardActionArea, CardActions, makeStyles } from '@mui/material'
 import { ThumbDownAltOutlined, ThumbUpAltOutlined } from '@mui/icons-material'
 import './style.css'
+import NameAvatar from '../../components/name-avatar';
+
+const style = {
+  title: {
+    fontFamily: 'Poppins'
+  }
+};
 
 const PublishScheduleCard = ({ schedule }) => {
   return (
@@ -21,7 +28,10 @@ const PublishScheduleCard = ({ schedule }) => {
           alt="schedule image"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography 
+            sx={style.title}
+            gutterBottom variant="h5" 
+            component="div">
             {schedule.title}
           </Typography>
           <div class="description">{schedule.description}</div>

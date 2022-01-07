@@ -7,4 +7,9 @@ export const UserRole = {
 export const ScheduleStatus = {
     PRIVATE: 0,
     PUBLISHED: 1,
-  };
+};
+
+export const VoteChoice = {
+    UPVOTE: 0,
+    DOWNVOTE: 1,
+};

@@ -1,52 +1,199 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import Select from 'react-select'
-
+import Select from 'react-select';
 import homeImage from "../../images/img-1.jpg";
+import { getAllLocations } from "../../services";
+import { MenuItem, TextField, Button, Grid, FormControl, RadioGroup, FormControlLabel, Radio, Checkbox } from "@mui/material";
+import { createStyles, makeStyles } from "@mui/styles";
+import { fontFamily } from "@mui/system";
+import { getPublicSchedules } from "../../services";
+import { setFilteredSchedules } from "../../store/schedule";
+import ErrorAlert from "../error-alert";
+import { useNavigate } from "react-router-dom";
 const { useState } = React;
 
+const useStyles = makeStyles((theme) => {
+  return createStyles({
+    search: {
+      maxWidth: '24vw',
+      backgroundColor: 'white', 
+      borderRadius: 4,
+      alignContent: 'center',
+      alignItems: 'stretch',
+      padding: 12,
+    },
+    searchBox: {
+      minWidth: '20vw',
+    },
+    radioButton: {
+      typography: 'Poppins',
+      fontFamily: 'Poppins'
+    }
+  });
+});
+
+const style = {
+  designButton: {
+    fontFamily: 'Poppins',
+  },
+  searchBox: {
+    minWidth: '20vw',
+    margin: 2,
+    fontFamily: 'Poppins',
+    textAlign: 'center'
+  },
+  radioButton: {
+    typography: 'Poppins',
+  }
+};
 
 export default function Hero() {
-  const options = [
-    { value: 'HoChiMinh', label: 'Ho Chi Minh, Viet Nam' },
-    { value: 'HaNoi', label: 'Ha Noi, Viet Nam' },
-    { value: 'DaNang', label: 'Da Nang, Viet Nam' }
-  ]
-  const [count, setCount] = useState(0);
+  const classes = useStyles();
+  const fetchList = useRef(false);
+  const [destination, setDestination] = useState('');
+  const [duration, setDuration] = useState(0);
+  const [filter, setFilter] = useState(0);
+  const [locations, setLocations] = useState([]);
+  const [filterDuration, setFilterDuration] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
   const user = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchList.current = true;
+    async function getLocations() {
+      const response = await getAllLocations();
+      if (fetchList.current) {
+        setLocations(response);
+      }
+    }
+    getLocations();
+    return () => {
+      fetchList.current = false;
+    }
+  }, []);
+
+  const filterSchedules = async () => {
+    let durationInt = 0;
+    if (filterDuration) {
+      try {
+        durationInt = parseInt(duration);
+      } catch (error) {
+        setErrorMessage('Invalid duration.');
+        return;
+      }
+      if (durationInt <= 0) {
+        setErrorMessage('Invalid duration');
+        return;
+      }
+    }
+    const response = await getPublicSchedules(destination, durationInt, filter);
+    setErrorMessage('');
+    console.log(response);
+    dispatch(setFilteredSchedules(response));
+  }
+
+  const handleChange = (type) => {
+    return (event) => {
+      const value = event.target.value;
+      if (type === 'dest') setDestination(value);
+      else if (type === 'duration') setDuration(value);
+      else if (type === 'filter') setFilter(value);
+    }
+  };
+
+  const goCreateSchedule = () => {
+    navigate('/schedule/create');
+  }
 
   return (
     <Section id="hero">
       <div className="background">
         <img src={homeImage} alt="" />
       </div>
+      <ErrorAlert errorMessage={errorMessage} setErrorMessage={setErrorMessage}/>
       <div className="content">
         <div className="title">
-          <h1>iTravel</h1>
+          
           <p>
-            {`Hi ${user.name}, let's explore some schedules to give it a go!`}
+            Hi <b>{user.name}</b>, <br/> let's explore some schedules to give it a go!
           </p>
+          
         </div>
-        <div className="search">
-          <div className="container">
-          <label htmlFor="">Destination</label>
+        <Grid
+          container 
+          direction="column" 
+          className={classes.search}>
 
-          <Select options={options} />
-          </div>
-          <div className="container">
-            <label htmlFor="">Duration</label>
-            
-      <div className="button__wrapper">
-        <button onClick={() => setCount(count - 1)}>-</button>
-         <h1 className={count > 0 ? "positive" : count < 0 ? "negative" : null}>
-        {count}
-        </h1>
-        <button onClick={() => setCount(count + 1)}>+</button>
-      </div>
-          </div>
-          <button1>Design your own schedule</button1>
-        </div>
+          <Grid item>
+            <TextField
+              inputProps={{
+                sx: {
+                  textAlign: 'left',
+                  fontFamily: 'Poppins'
+                }
+              }}
+              select
+              size="small"
+              variant="outlined"
+              sx={style.searchBox}
+              color="secondary"
+              label="Destination"
+              value={destination}
+              onChange={handleChange('dest')}>
+                {
+                  locations.map((location) => (
+                    <MenuItem key={location._id} value={location._id}>
+                      {location.name}
+                    </MenuItem>
+                  ))
+                }
+            </TextField>
+          </Grid>
+          <FormControlLabel 
+            checked={filterDuration}
+            sx={{alignSelf: 'center'}} 
+            label="Duration" 
+            control={<Checkbox color="secondary"/>}
+            size="small"
+            onChange={() => { setFilterDuration(!filterDuration); }}
+          />
+          <Grid item>
+            <TextField
+              type="number"
+              defaultValue={2}
+              size="small"
+              variant="outlined"
+              sx={style.searchBox}
+              color="secondary"
+              label="Trip duration"
+              disabled={!filterDuration}
+              onChange={handleChange('duration')}>
+            </TextField>
+          </Grid>
+          <Grid item>
+            <FormControl component="fieldset">
+              <RadioGroup row
+                value={filter}
+                onChange={handleChange('filter')}>
+                <FormControlLabel
+                  value={0} 
+                  size="small"
+                  control={<Radio inputProps={{sx: {fontFamily: 'Poppins'}}} className={classes.radioButton} color="secondary"/>} 
+                  label="Hotest"/>
+                <FormControlLabel size ="small" value={1} control={<Radio color="secondary"/>} label="Latest"/>
+              </RadioGroup>
+            </FormControl>
+          </Grid>
+          <Grid item>
+            <Button variant="outlined" color="secondary" sx={style.designButton} onClick={filterSchedules}>Search</Button>
+          </Grid>
+        </Grid>
+        <Button variant="contained" color="primary" sx={style.designButton} onClick={goCreateSchedule}>
+            or design your own schedule &gt;&gt;
+          </Button>
       </div>
     </Section>
   );
@@ -54,15 +201,13 @@ export default function Hero() {
 
 const Section = styled.section`
   position: relative;
-  margin-top: 2rem;
   width: 100%;
   height: 100%;
 
   .background {
-    height: 100%;
     img {
       width: 100%;
-      height: 50%;
+      height: 90%;
       filter: brightness(60%);
     }
   }
@@ -81,7 +226,7 @@ const Section = styled.section`
     .title {
 
       h1 {
-        font-size: 4rem;
+        font-size: 3rem;
         letter-spacing: 0.2rem;
         color: white
       }

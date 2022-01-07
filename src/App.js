@@ -41,7 +41,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "Poppins"
-  },
+  }
 })
 
 function App() {

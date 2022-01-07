@@ -231,3 +231,71 @@ export async function mySchedules() {
     }
     return false;
 }
+
+export async function getPublicSchedules(destinationId, duration, filter) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/schedule/?destination=${destinationId}&duration=${duration}&filter=${filter}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `bearer ${token}`,
+        },
+    });
+    if (response.status === status.OK) {
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+        return jsonResponse.data.schedules;
+    }
+    return false;
+}
+
+export async function getAttractionsAtLocation(destinationId) {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/info/attraction?destinationId=${destinationId}`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    if (response.status === status.OK) {
+        const jsonReponse = await response.json();
+        return jsonReponse.data.attractions;
+    }
+    return [];
+}
+
+export async function voteSchedule(scheduleId, voteChoice) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/schedule/vote`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `bearer ${token}`,
+        },
+        body: JSON.stringify({
+            scheduleId,
+            choice: voteChoice,
+        }),
+    });
+    if (response.status === status.OK) {
+        return true;
+    }
+    return false;
+}
+
+export async function publishSchedule(scheduleId, description) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/schedule/publish`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `bearer ${token}`,
+        },
+        body: JSON.stringify({
+            scheduleId,
+            description,
+        }),
+    });
+    if (response.status === status.OK) {
+        return true;
+    }
+    return false;
+
+}

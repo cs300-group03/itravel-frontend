@@ -111,9 +111,6 @@ export const LandingPage = () => {
                 <img className={classes.landingImage} src={LandingImage} alt='Landing'/>
                 <img className={classes.landingBackground} src={LandingBackground} alt='Landing background'/>
             </Grid>
-            <Grid item xs={12}>
-                <div className={classes.footer}/>
-            </Grid>
         </Grid>
     );
 }

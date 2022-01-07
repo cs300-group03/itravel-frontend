@@ -1,8 +1,10 @@
 const style = {
   container: {
     display: 'flex',
+    minHeight: '100vh',
     flexDirection: 'row',
     alignItems: 'center',
+    alignContent: 'center',
     paddingTop: 10,
   },
   imageContainer: {

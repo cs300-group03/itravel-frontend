@@ -7,8 +7,10 @@ import Services from "../components/Recommend/RecommendLocations";
 import FeaturedSchedules from "../components/featuredSchedules/featuredSchedules";
 import Addition from "../components/footer/homeAddition";
 import Header from "../components/Header/Header";
+import { useSelector } from "react-redux";
 
 export default function Home() {
+  const user = useSelector(state => state.auth.user);
   useEffect(() => {
     const sr = scrollreveal({
       origin: "top",

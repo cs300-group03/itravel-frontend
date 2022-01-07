@@ -21,6 +21,7 @@ import { UserRole } from './constant';
 import TravelerProfile from './pages/profile/traveler-profile';
 import ServiceProviderProfilePage from './pages/profile/service-provider';
 import SchedulePage from './pages/schedule-page';
+import CreateSchedulePage from './pages/create-schedule';
 
 const theme = createTheme({
   spacing: 4,
@@ -113,6 +114,11 @@ function App() {
       path: '/schedule',
       isPrivate: true,
     },
+    {
+      element: <CreateSchedulePage/>,
+      path: '/schedule/create',
+      isPrivate: true,
+    }
   ];
 
   return (

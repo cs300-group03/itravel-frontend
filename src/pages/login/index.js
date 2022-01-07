@@ -21,9 +21,32 @@ import { useNavigate } from 'react-router-dom';
 import ErrorAlert from '../../components/error-alert';
 import { logIn } from '../../services';
 import { setAuthorized, setUser, setUserEmail } from '../../store/auth';
+import Logo from '../../assets/logo.png';
+import { createStyles, makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles((theme) => {
+  return createStyles({
+    logoHeader: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignSelf: 'center',
+      marginBottom: 40,
+    },
+    logo: {
+      width: 50,
+      height: 50,
+    },
+    logoText: {
+      fontSize: 25,
+      margin: 0,
+      padding: 0
+    },
+  });
+});
 
 const LoginPage = () => {
-  // const classes = useStyles()
+  const classes = useStyles();
 
   const [values, setValues] = React.useState({
     email: '',
@@ -109,12 +132,16 @@ const LoginPage = () => {
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'row',
+          flexDirection: 'column',
           flex: 1,
           alignItems: 'flex-start',
         }}
       >
         <Box sx={style.loginContainer}>
+          <div className={classes.logoHeader}>
+              <img className={classes.logo} src={Logo} alt='Logo'/>
+              <h3 className={classes.logoText}>iTravel</h3>
+          </div>
           <TextField
             sx={style.inputContainer}
             label="Email"

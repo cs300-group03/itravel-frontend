@@ -22,11 +22,14 @@ import SearchService from '../../components/searchbox/search-service'
 import { Main, AppBar, DrawerHeader } from './elements'
 import PublishAlertDialog from '../../components/dialog/publish-dialog'
 import SearchResultCard from '../../components/searchResultCard'
-const drawerWidth = 340
+import { useSelector } from 'react-redux'
 
-export default function SchedulePage({ schedule }) {
+const drawerWidth = 290
+
+export default function SchedulePage() {
+  const schedule = useSelector(state => state.schedule.currentSchedule);
   const theme = useTheme()
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(true)
   const [openPublishDialog, setOpenPublishDialog] = React.useState(false)
   const handleDrawerOpen = () => {
     setOpen(true)

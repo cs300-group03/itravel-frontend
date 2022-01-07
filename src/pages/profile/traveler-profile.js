@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import style from './service-provider/style'
@@ -6,16 +6,30 @@ import ScheduleCard from '../../components/schedule-card/creator-view'
 import schedule from '../../data/schedule'
 import { Link } from 'react-router-dom';
 import './style.css'
+import { useDispatch, useSelector } from 'react-redux';
+import Header from '../../components/Header/Header';
+import { mySchedules } from '../../services'
+import { setSchedules } from '../../store/schedule'
 
-const schedules = [schedule, schedule, schedule, schedule]
-const scheduleList = schedules.map((schedule) => (<ScheduleCard schedule={schedule} />))
-const TravelerProfile = ({ user }) => {
-  // const scheduleList = user.schedules.map((schedule) => (
-  //   <ScheduleCard schedule={schedule} />
-  // ))
+const TravelerProfile = () => {
+  const myScheduleList = useSelector(state => state.schedule.mySchedules);
+  const [trash, setTrash] = useState(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function getSchedules() {
+      const response = await mySchedules();
+      if (response) {
+        dispatch(setSchedules(response));
+        console.log(response);
+      }
+    }
+    getSchedules();
+  }, [trash]);
 
   return (
     <Box sx={style.container}>
+      <Header/>
       <Button 
       variant="contained" 
       startIcon={<Add />} 
@@ -32,10 +46,12 @@ const TravelerProfile = ({ user }) => {
         Your schedules
       </Box>
       <div class="card-list">
-        {scheduleList}
+        {
+          myScheduleList.map((schedule) => (<ScheduleCard key={schedule._id} schedule={schedule}/>))
+        }
       </div>
     </Box>
   )
 }
 
-export default TravelerProfile
+export default TravelerProfile;

@@ -3,55 +3,19 @@ import styled from "styled-components";
 import Destination1 from "../../images/Destination1.png";
 import Destination2 from "../../images/Destination1.png";
 import Destination3 from "../../images/Destination1.png";
-
+import PublishScheduleCard from "../schedule-card/publish-view";
+import schedule from "../../data/schedule"
 
 export default function FeaturedSchedules() {
-  const data = [
-    {
-      image: Destination1,
-      title: "Singapore",
-      subTitle: "Singapore, officialy thr Republic of Singapore, is a",
-      cost: "38,800",
-      duration: "Approx 2 night trip",
-    },
-    {
-      image: Destination2,
-      title: "Singapore",
-      subTitle: "Singapore, officialy thr Republic of Singapore, is a",
-      cost: "38,800",
-      duration: "Approx 2 night trip",
-    },
-    {
-      image: Destination3,
-      title: "Singapore",
-      subTitle: "Singapore, officialy thr Republic of Singapore, is a",
-      cost: "38,800",
-      duration: "Approx 2 night trip",
-    },
-    
-    
-  ];
-
-
+  const schedules = [schedule, schedule, schedule, schedule]
   const [active, setActive] = useState(1);
   return (
     <Section id="recommend">
       
       <div className="destinations">
-        {data.map((destination) => {
+        {schedules.map((schedule) => {
           return (
-            <div className="destination">
-              <img src={destination.image} alt="" />
-              <h3>{destination.title}</h3>
-              <p>{destination.subTitle}</p>
-              <div className="info">
-                <h4>{destination.cost}</h4>
-              </div>
-              <div className="distance">
-                <span>1000 Kms</span>
-                <span>{destination.duration}</span>
-              </div>
-            </div>
+            <PublishScheduleCard schedule={schedule} />
           );
         })}
       </div>

@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { UserRole } from "../../constant";
 
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
         user: {
             email: '',
+            role: UserRole.TRAVELLER,
         },
         isAuthorized: false,
     },
@@ -13,7 +15,14 @@ const authSlice = createSlice({
             state.user.email = action.payload;
         },
         setUser: (state, action) => {
-            state.user = action.payload;
+            if (action.payload)
+                state.user = action.payload;
+            else {
+                state.user = {
+                    email: '',
+                    role: UserRole.TRAVELLER,
+                };
+            }
         },
         setAuthorized: (state, action) => {
             state.isAuthorized = action.payload;

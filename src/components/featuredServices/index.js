@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Destination1 from "../../images/Destination1.png";
-import Destination2 from "../../images/Destination1.png";
-import Destination3 from "../../images/Destination1.png";
-import ServiceCard from "../../components/service-card/index"
 import service from "../../data/service";
+import PublishServiceCard from "../publish-service-card";
 
 export default function FeaturedServices() {
   const services = [service, service, service, service]
@@ -15,7 +12,7 @@ export default function FeaturedServices() {
       <div className="destinations">
         {services.map((service) => {
           return (
-            <ServiceCard service={service} />
+            <PublishServiceCard service={service}/>
           );
         })}
       </div>

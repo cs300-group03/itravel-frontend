@@ -52,7 +52,7 @@ export default function ServicesLine() {
 }
 
 const Section = styled.section`
-  padding:  2rem ;
+  padding:  1rem ;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   gap: 1rem;

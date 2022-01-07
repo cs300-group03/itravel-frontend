@@ -85,7 +85,7 @@ export const SignUpPage = () => {
 
     useEffect(() => {
         async function signupFunc() {
-            const response = await signUp(email, name, userRole, password);
+            const response = await signUp(email.trim(), name.trim(), userRole, password);
             if (response.message) {
                 setSignupError(response.message);
             } else {
@@ -103,7 +103,7 @@ export const SignUpPage = () => {
     const navigate = useNavigate();
 
     const sendSignupRequest = () => {
-        if (email && name && password)
+        if (email.trim() && name.trim() && password)
             setSignupRequest(!signupRequest);
         else {
             setSignupError('Please fill all information.');

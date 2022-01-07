@@ -17,6 +17,10 @@ import { getProfile } from './services';
 import { useDispatch } from "react-redux";
 import { setUser } from './store/auth';
 import { setAuthorized } from './store/auth';
+import { UserRole } from './constant';
+import TravelerProfile from './pages/profile/traveler-profile';
+import ServiceProviderProfilePage from './pages/profile/service-provider';
+import SchedulePage from './pages/schedule-page';
 
 const theme = createTheme({
   spacing: 4,
@@ -30,11 +34,15 @@ const theme = createTheme({
     neutral: {
       main: '#ffffff',
     },
+    dark: {
+      main: '#000000',
+    }
   },
 })
 
 function App() {
   const isAuthorized = useSelector(state => state.auth.isAuthorized);
+  const userRole = useSelector(state => state.auth.user.type);
   const [trash, setTrash] = React.useState('');
   const dispatch = useDispatch();
 
@@ -94,6 +102,16 @@ function App() {
       element: <VerifyPage/>,
       path: '/verify',
       isPrivate: false,
+    },
+    {
+      element: (userRole === UserRole.TRAVELLER) ? <TravelerProfile/> : <ServiceProviderProfilePage/>,
+      path: '/profile',
+      isPrivate: true,
+    },
+    {
+      element: <SchedulePage/>,
+      path: '/schedule',
+      isPrivate: true,
     },
   ];
 

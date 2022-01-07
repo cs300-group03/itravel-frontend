@@ -177,7 +177,7 @@ export async function getAllLocations() {
     return jsonReponse.data.locations;
 }
 
-export async function createSchedule(title, destinationId, startDate, endDate) {
+export async function createSchedule(title, destinationId, startDate, endDate, duration) {
     const token = localStorage.getItem('token');
     const response = await fetch(`${process.env.REACT_APP_API_URL}/schedule/create`, {
         method: 'POST',
@@ -186,7 +186,7 @@ export async function createSchedule(title, destinationId, startDate, endDate) {
             'authorization': `bearer ${token}`,
         },
         body: JSON.stringify({
-            title, destinationId, startDate, endDate,
+            title, destinationId, startDate, endDate, duration
         }),
     });
     if (response.status === status.OK) {
@@ -199,7 +199,7 @@ export async function createSchedule(title, destinationId, startDate, endDate) {
 // start: { hour, minute }
 export async function addActivity(scheduleId, title, start, end, serviceId) {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.API_URL}/schedule/add`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/schedule/add`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -212,6 +212,22 @@ export async function addActivity(scheduleId, title, start, end, serviceId) {
     if (response.status === status.OK) {
         const jsonResponse = await response.json();
         return jsonResponse.data.activity;
+    }
+    return false;
+}
+
+export async function mySchedules() {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/schedule/my`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `bearer ${token}`,
+        },
+    });
+    if (response.status === status.OK) {
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+        return jsonResponse.data.schedules;
     }
     return false;
 }

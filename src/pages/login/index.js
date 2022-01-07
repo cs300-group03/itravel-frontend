@@ -54,7 +54,6 @@ const LoginPage = () => {
       } else {
         dispatch(setUser(response));
         dispatch(setAuthorized(true));
-        navigate('/');
       }
     }
     if (values.email && values.password) {

@@ -1,7 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import Select from 'react-select'
+
 import homeImage from "../../images/img-1.jpg";
+const { useState } = React;
+
+
 export default function Hero() {
+  const options = [
+    { value: 'HoChiMinh', label: 'Ho Chi Minh, Viet Nam' },
+    { value: 'HaNoi', label: 'Ha Noi, Viet Nam' },
+    { value: 'DaNang', label: 'Da Nang, Viet Nam' }
+  ]
+  const [count, setCount] = useState(0);
+
+  
   return (
     <Section id="hero">
       <div className="background">
@@ -16,14 +29,22 @@ export default function Hero() {
         </div>
         <div className="search">
           <div className="container">
-            <label htmlFor="">Where you want to go</label>
-            <input type="text" placeholder="Search Your location" />
+          <label htmlFor="">Destination</label>
+
+          <Select options={options} />
           </div>
           <div className="container">
             <label htmlFor="">Duration</label>
-            <input type="text" placeholder="Number of days for your trip" />
+            
+      <div className="button__wrapper">
+        <button onClick={() => setCount(count - 1)}>-</button>
+         <h1 className={count > 0 ? "positive" : count < 0 ? "negative" : null}>
+        {count}
+        </h1>
+        <button onClick={() => setCount(count + 1)}>+</button>
+      </div>
           </div>
-          <button>Design your own schedule</button>
+          <button1>Design your own schedule</button1>
         </div>
       </div>
     </Section>
@@ -57,16 +78,19 @@ const Section = styled.section`
     align-items: center;
     gap: 1rem;
     .title {
-      color: white;
+
       h1 {
-        font-size: 3rem;
+        font-size: 4rem;
         letter-spacing: 0.2rem;
+        color: white
       }
       p {
         text-align: center;
         padding: 0 30vw;
         margin-top: 0.5rem;
         font-size: 1.2rem;
+        color: white
+
       }
     }
     .search {
@@ -101,7 +125,41 @@ const Section = styled.section`
           }
         }
       }
-      button {
+      .button__wrapper {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+          alignSelf: 'center',
+                borderRadius: 10,
+
+        & > * {
+          border: none;
+          background-color: white;
+          box-shadow: 0px 0px 10px $clr-gray200;
+          font-weight: bold;
+          font-size: 1rem;
+          color: inherit;
+          border-radius: 50%;
+          outline: none;
+          height: 2rem;
+          width: 2rem;
+          cursor: pointer;
+          transition: background-color 250ms ease-in-out, transform 50ms ease-in-out;
+      
+          &:hover {
+            background-color: $clr-gray200;
+          }
+      
+          &:active {
+            transform: scale(0.9);
+          }
+      
+          &:focus {
+            box-shadow: 0 0 0 3px $clr-gray500;
+          }
+        }
+      }
+      button1 {
         padding: 1rem;
         cursor: pointer;
         border-radius: 0.3rem;

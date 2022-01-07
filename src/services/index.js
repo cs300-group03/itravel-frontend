@@ -173,7 +173,7 @@ export async function logIn(email, password) {
 
 export async function getAllLocations() {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/info/location`);
-    const jsonReponse = await response();
+    const jsonReponse = await response.json();
     return jsonReponse.data.locations;
 }
 

@@ -25,10 +25,12 @@ import SearchResultCard from '../../components/searchResultCard'
 import { useSelector } from 'react-redux'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import DateRangeIcon from '@mui/icons-material/DateRange'
+import NameAvatar from '../../components/name-avatar';
 
 const drawerWidth = 340
 
 export default function SchedulePage() {
+  const user = useSelector(state => state.auth.user);
   const schedule = useSelector(state => state.schedule.currentSchedule);
   const theme = useTheme()
   const [open, setOpen] = React.useState(true)
@@ -63,10 +65,10 @@ export default function SchedulePage() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, fontFamily: 'Poppins' }}>
             {schedule.title}
           </Typography>
-          <Button onClick={handleOpenDialog} color="inherit">
+          <Button onClick={handleOpenDialog} color="inherit" sx={{fontFamily: 'Poppins'}}>
             Publish
           </Button>
           <PublishAlertDialog
@@ -77,7 +79,7 @@ export default function SchedulePage() {
             Share
           </Button>
           <Link to="\">
-            <Avatar src="https://icdn.dantri.com.vn/2017/emma-watson-5-1488809769584.jpg" />
+            <NameAvatar border name={user.name}/>
           </Link>
         </Toolbar>
       </AppBar>

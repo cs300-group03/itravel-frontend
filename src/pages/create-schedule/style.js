@@ -3,8 +3,10 @@ const style = {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    alignContent: 'center',
     paddingTop: 7,
     paddingLeft: 5,
+    height: '93vh',
   },
   
   imageContainer: {
@@ -24,7 +26,6 @@ const style = {
   },
 
   inputContainer: {
-    mt: 12,
     width: 500,
     height: 55,
     mb: 4,

@@ -12,7 +12,7 @@ import { setUser } from '../../store/auth';
 const useStyles = makeStyles((theme) => {
   return createStyles({
     header: {
-      height: '12vh',
+      height: '8vh',
       backgroundColor: theme.palette.dark.main,
       display: 'flex',
     },
@@ -39,10 +39,16 @@ const useStyles = makeStyles((theme) => {
     },
     icon: {
       margin: 0,
-      padding: 0
+      padding: 0,
+      '&:hover': {
+        color: theme.palette.primary.main
+      }
     },
     name: {
       color: theme.palette.neutral.main,
+      '&:hover': {
+        color: theme.palette.primary.main,
+      }
     },
     menu: {
       float: 'none',
@@ -54,7 +60,7 @@ const useStyles = makeStyles((theme) => {
       textDecoration: 'none',
       display: 'block',
       textAlign: 'left',
-      hover: {
+      '&:hover': {
         backgroundColor: theme.palette.primary.main,
       }
     }
@@ -134,11 +140,13 @@ const Header = () => {
                   </div>
                 </div>
             </Grid>
-            <Grid item className={classes.icon}>
-              <Notifications fontSize="medium" color="neutral"/>
+            <Grid item>
+              <Notifications className={classes.icon} fontSize="medium" color="neutral"/>
             </Grid>
             <Grid item>
-              <Typography className={classes.name} sx={style.name}>{user.name}</Typography>
+              <Typography className={classes.name} sx={style.name} onClick={handleRouteChange('/profile')}>
+                {user.name}
+              </Typography>
             </Grid>
             <Grid item>
               <NameAvatar name={user.name}/>
@@ -154,10 +162,12 @@ const style = {
   routeButton: {
     fontFamily: 'Poppins',
     fontSize: 16,
-    padding: 2,
   },
   name: {
     fontFamily: 'Poppins',
+    hover: {
+      color: '#F4A442'
+    }
   }
 }
 

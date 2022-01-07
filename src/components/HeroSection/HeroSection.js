@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Select from 'react-select'
 
@@ -13,8 +14,8 @@ export default function Hero() {
     { value: 'DaNang', label: 'Da Nang, Viet Nam' }
   ]
   const [count, setCount] = useState(0);
+  const user = useSelector(state => state.auth.user);
 
-  
   return (
     <Section id="hero">
       <div className="background">
@@ -24,7 +25,7 @@ export default function Hero() {
         <div className="title">
           <h1>iTravel</h1>
           <p>
-            Hi, let's explore some schedules to give it a go!
+            {`Hi ${user.name}, let's explore some schedules to give it a go!`}
           </p>
         </div>
         <div className="search">

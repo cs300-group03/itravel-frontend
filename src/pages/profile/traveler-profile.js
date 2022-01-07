@@ -34,8 +34,8 @@ const TravelerProfile = () => {
       variant="contained" 
       startIcon={<Add />} 
       sx={style.createButton} 
-      component = {Link} 
-      to="/create-schedule"
+      component = {Link}
+      to="/schedule/create"
       >
         Create new schedule
       </Button>

@@ -2,15 +2,12 @@ import React, { useEffect } from "react";
 import Hero from "../components/HeroSection/HeroSection";
 import scrollreveal from "scrollreveal";
 import ScrollToTop from "../components/ScrollToTop";
-import styled from "styled-components";
 import Services from "../components/Recommend/RecommendLocations";
 import FeaturedSchedules from "../components/featuredSchedules/featuredSchedules";
 import Addition from "../components/footer/homeAddition";
 import Header from "../components/header/Header";
-import { useSelector } from "react-redux";
 
 export default function Home() {
-  const user = useSelector(state => state.auth.user);
   useEffect(() => {
     const sr = scrollreveal({
       origin: "top",

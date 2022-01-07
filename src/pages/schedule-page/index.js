@@ -16,13 +16,15 @@ import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import ScheduleCalendar from '../../components/schedule-calendar'
 import { Link } from 'react-router-dom'
-import { Button, ListItemButton } from '@mui/material'
+import { Button, ListItemButton, Card } from '@mui/material'
 import SearchAttraction from '../../components/searchbox/search-attraction'
 import SearchService from '../../components/searchbox/search-service'
 import { Main, AppBar, DrawerHeader } from './elements'
 import PublishAlertDialog from '../../components/dialog/publish-dialog'
 import SearchResultCard from '../../components/searchResultCard'
 import { useSelector } from 'react-redux'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
+import DateRangeIcon from '@mui/icons-material/DateRange'
 
 const drawerWidth = 340
 
@@ -95,8 +97,9 @@ export default function SchedulePage() {
         <DrawerHeader>
           <Box
             component="img"
-            src={schedule.img}
-            sx={{ height: 150, position: 'relative', width: '100%' }}
+            // src={schedule.img}
+            src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/12/61/e5.jpg"
+            sx={{ height: 145, position: 'relative', width: '100%' }}
           ></Box>
           <IconButton
             onClick={handleDrawerClose}
@@ -115,8 +118,53 @@ export default function SchedulePage() {
             )}
           </IconButton>
         </DrawerHeader>
-        <Box sx={{ padding: 3 }}>
-          <SearchAttraction />
+        <Box sx={{ display:"flex", flexDirection: "column",  padding: 3 }}>
+        <Card
+          sx={{
+            padding: 2,
+            mt: -22,
+            zIndex: 4,
+            width: '90%',
+            ml: 'auto',
+            mr: 'auto',
+          }}
+        >
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography
+              component="div"
+              sx={{ fontSize: 20, textAlign: 'center', fontWeight: '600' }}
+            >
+              Trip to Nha Trang Yay!!
+            </Typography>
+
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                mt: 2,
+              }}
+            >
+              <DateRangeIcon></DateRangeIcon>
+              <Typography sx={{ fontSize: 11, ml: 1 }}>
+                22 Dec, 2020 - 28 Dec, 2020
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                mt: 1,
+              }}
+            >
+              <LocationOnIcon></LocationOnIcon>
+              <Typography sx={{ fontSize: 11, ml: 1 }}> Dalat </Typography>
+            </Box>
+          </Box>
+        </Card>
+        <Box sx={{ display:"flex", flexDirection: "column",  padding: 3 }}>
+        <SearchAttraction />
           <List spacing="2">
             <ListItem>
               <SearchResultCard
@@ -158,7 +206,10 @@ export default function SchedulePage() {
               />
             </ListItem>
           </List>
+          
         </Box>
+        </Box>
+        
       </Drawer>
       <Main open={open}>
         <DrawerHeader />

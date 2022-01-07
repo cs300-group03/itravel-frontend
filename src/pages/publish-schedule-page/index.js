@@ -103,6 +103,7 @@ export default function PublishSchedulePage() {
         </DrawerHeader>
         <Card
           sx={{
+            height: 100,
             padding: 3,
             mt: -10,
             zIndex: 2,

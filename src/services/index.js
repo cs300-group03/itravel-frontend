@@ -196,7 +196,6 @@ export async function createSchedule(title, destinationId, startDate, endDate, d
     return false;
 }
 
-// start: { hour, minute }
 export async function addActivity(scheduleId, title, start, end, serviceId) {
     const token = localStorage.getItem('token');
     const response = await fetch(`${process.env.REACT_APP_API_URL}/schedule/add`, {
@@ -298,4 +297,19 @@ export async function publishSchedule(scheduleId, description) {
     }
     return false;
 
+}
+
+export async function fetchEvents(scheduleId) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/schedule/events?scheduleId=${scheduleId}`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `bearer ${token}`,
+        },
+    });
+    if (response.status === status.OK) {
+        const jsonReponse = await response.json();
+        return jsonReponse.data.activities;
+    }
+    return [];
 }

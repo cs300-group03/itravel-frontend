@@ -10,6 +10,8 @@ import { CardActionArea, CardActions, makeStyles } from '@mui/material'
 import { ThumbDownAltOutlined, ThumbUpAltOutlined } from '@mui/icons-material'
 import './style.css'
 import NameAvatar from '../../components/name-avatar';
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const style = {
   title: {
@@ -18,13 +20,18 @@ const style = {
 };
 
 const PublishScheduleCard = ({ schedule }) => {
+  const navigate = useNavigate();
+  const goSchedule = () => {
+    navigate('/schedule');
+  }
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} onClick={goSchedule}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="170"
-          image={schedule.img}
+          image={schedule.img || process.env.REACT_APP_DEFAULT_IMG}
           alt="schedule image"
         />
         <CardContent>
@@ -39,8 +46,8 @@ const PublishScheduleCard = ({ schedule }) => {
       </CardActionArea>
       <CardActions>
         <div className="info">
-          <Avatar src="https://icdn.dantri.com.vn/2017/emma-watson-5-1488809769584.jpg"></Avatar>
-          <span>Emma Watson</span>
+          <NameAvatar name={schedule.creator.name}/>
+          <span>{schedule.creator.name}</span>
           <div className="icons">
             <ThumbUpAltOutlined></ThumbUpAltOutlined>
             <p>{schedule.upvote}</p>

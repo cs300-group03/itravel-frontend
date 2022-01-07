@@ -1,11 +1,18 @@
 import {Modal, Button} from 'antd';
 import React, {Component} from 'react';
 import AddEvent from './AddEvent';
+import store from '../../../../store';
+import { setTitle } from '../../../../store/schedule';
 
 class AddEventModal extends Component {
-  state = {
-    title: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+    };
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleOk = this.handleOk.bind(this);
+  }
 
   /**
    * To show the title auto fill and
@@ -28,9 +35,7 @@ class AddEventModal extends Component {
    * @param {event} event - JS/React event
    */
   handleTitleChange = event => {
-    this.setState ({
-      title: event.target.value,
-    });
+    store.dispatch(setTitle(event.target.defaultValue));
   };
 
   /**

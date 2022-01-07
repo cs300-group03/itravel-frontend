@@ -6,8 +6,31 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import { useDispatch, useSelector } from 'react-redux';
+import { publishSchedule } from '../../services';
+import { Alert } from '@mui/material';
+import { toggleCurrentSchedule } from '../../store/schedule';
 
 export default function PublishAlertDialog( {open, handleClose} ) {
+  const schedule = useSelector(state => state.schedule.currentSchedule);
+  const [description, setDescription] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState('');
+  const dispatch = useDispatch();
+
+  const changeDescription = (e) => {
+    setDescription(e.target.value);
+  }
+
+  async function publish() {
+    const response = await publishSchedule(schedule._id, description);
+    if (response) {
+      dispatch(toggleCurrentSchedule());
+      handleClose();
+    } else {
+      setErrorMessage('Cannot publish.');
+    }
+  }
+
   return (
     <div>
       <Dialog
@@ -34,11 +57,13 @@ export default function PublishAlertDialog( {open, handleClose} ) {
             multiline
             maxRows={6}
             variant="standard"
+            onChange={changeDescription}
           />
+          {errorMessage && <Alert severity="error" onClose={() => {}}>{errorMessage}</Alert>}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancle</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={publish} autoFocus>
             Publish
           </Button>
         </DialogActions>

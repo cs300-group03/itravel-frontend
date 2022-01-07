@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Destination1 from "../../images/Destination1.png";
-import Destination2 from "../../images/Destination1.png";
-import Destination3 from "../../images/Destination1.png";
 import PublishScheduleCard from "../schedule-card/publish-view";
-import schedule from "../../data/schedule"
+import { useSelector } from "react-redux";
 
 export default function FeaturedSchedules() {
-  const schedules = [schedule, schedule, schedule, schedule]
-  const [active, setActive] = useState(1);
+  const filteredSchedules = useSelector(state => state.schedule.filteredSchedules);
+
   return (
     <Section id="recommend">
-      
       <div className="destinations">
-        {schedules.map((schedule) => {
+        {filteredSchedules.length > 0 && filteredSchedules.map((schedule) => {
           return (
             <PublishScheduleCard schedule={schedule} />
           );
         })}
+        {filteredSchedules.length === 0 && <h3>No schedules. Sorry!</h3>}
       </div>
     </Section>
   );

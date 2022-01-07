@@ -6,6 +6,9 @@ const scheduleSlice = createSlice({
         currentSchedule: '',
         mySchedules: [], // Complete schedules, not just ID. List of ID is in state.auth.user.schedules
         filteredSchedules: [],
+        title: '',
+        start: null,
+        end: null,
     },
     reducers: {
         setCurrentSchedule: (state, action) => {
@@ -22,9 +25,31 @@ const scheduleSlice = createSlice({
         },
         setFilteredSchedules: (state, action) => {
             state.filteredSchedules = action.payload;
-        }
+        },
+        setTitle: (state, action) => {
+            state.title = action.payload;
+        },
+        setStart: (state, action) => {
+            state.start = action.payload;
+        },
+        setEnd: (state, action) => {
+            state.end = action.payload;
+        },
+        toggleCurrentSchedule: (state) => {
+            state.currentSchedule.status = !state.currentSchedule.status;
+        },
+        resetLogout: (state) => {
+            state = {
+                currentSchedule: '',
+                mySchedules: [], // Complete schedules, not just ID. List of ID is in state.auth.user.schedules
+                filteredSchedules: [],
+                title: '',
+                start: null,
+                end: null,
+            };
+        },
     },
 });
 
-export const { setCurrentSchedule, setSchedules, appendSchedule, concatSchedules, setFilteredSchedules } = scheduleSlice.actions;
+export const { setCurrentSchedule, setSchedules, appendSchedule, concatSchedules, setFilteredSchedules, setTitle, setStart, setEnd, toggleCurrentSchedule } = scheduleSlice.actions;
 export const scheduleReducer = scheduleSlice.reducer;

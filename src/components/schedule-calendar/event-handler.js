@@ -1,6 +1,22 @@
 import moment from 'moment';
 
 const CalendarEventHandler = (function () {
+  function addEvents (allEvents, newEvents) {
+    for (const event of newEvents) {
+      const time = moment(event.start).hours();
+      const eventWithMeatInfo = {
+        ...event,
+        startWeek: moment(event.start).week(),
+        endWeek: moment(event.end).week(),
+      };
+      if (allEvents[time]) {
+        allEvents[time].push(eventWithMeatInfo);
+      } else {
+        allEvents[time] = [eventWithMeatInfo];
+      }
+    }
+    return {...allEvents};
+  }
   function addEvent (allEvents, newEvent) {
     const time = moment (newEvent.start).hours ();
     const eventWithMeatInfo = {
@@ -38,6 +54,7 @@ const CalendarEventHandler = (function () {
 
   return {
     add: addEvent,
+    addMany: addEvents,
     delete: deleteEvent,
     update: updateEvent,
     generateId: generateUniqueId,

@@ -7,18 +7,32 @@ import TimeSlotGroup from './TimeSlotGroup';
 import EventHighlighter from './EventHighlighter';
 import {times, getAllDaysInTheWeek} from '../../utils';
 import {container} from '../styles';
+import store from '../../../../store';
+import { formatMomentDate } from '../../../../utils';
 
-const current = moment("20221030");
+const current = moment();
 
 class WeekView extends Component {
   state = {
-    // startDate: +moment (),
     startDate: +current,
-    weekDays: getAllDaysInTheWeek (current),
+    weekDays: getAllDaysInTheWeek(current),
     showAddEventModal: false,
     eventStart: null,
     eventEnd: null,
+    title: '',
   };
+  constructor(props) {
+    super(props);
+    this.schedule = store.getState().schedule.currentSchedule;
+  }
+
+  componentDidMount() {
+    const momentStartDate = moment(formatMomentDate(this.schedule.startDate));
+    this.setState({
+      startDate: +momentStartDate,
+      weekDays: getAllDaysInTheWeek(momentStartDate),
+    });
+  }
 
   /**
    * Sets next week days in the state
@@ -105,6 +119,12 @@ class WeekView extends Component {
     });
   };
 
+  handleTitleChange = event => {
+    this.setState({
+      title: event.target.defaultValue,
+    });
+  }
+
   render () {
     const {
       weekDays,
@@ -112,6 +132,7 @@ class WeekView extends Component {
       eventStart,
       eventEnd,
       startDate,
+      title,
     } = this.state;
     const {events} = this.props;
     return (
@@ -124,7 +145,9 @@ class WeekView extends Component {
           onOk={this.onOkAddEventModal}
           eventStart={eventStart}
           eventEnd={eventEnd}
+          title={title}
           onTimeChange={this.onCurrentEventTimeChange}
+          onTitleChange={this.handleTitleChange}
         />
 
         <WeekToolbar

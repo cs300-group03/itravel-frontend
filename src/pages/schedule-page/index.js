@@ -26,12 +26,16 @@ import NameAvatar from '../../components/name-avatar';
 import SendIcon from '@mui/icons-material/Send';
 import { formatDate } from '../../utils';
 import { getAttractionsAtLocation } from '../../services'
+import { ScheduleStatus } from '../../constant'
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import UnPublishAlertDialog from '../../components/dialog/unpublish-dialog'
 
 const drawerWidth = 340
 
 export default function SchedulePage() {
   const user = useSelector(state => state.auth.user);
   const schedule = useSelector(state => state.schedule.currentSchedule);
+  const scheduleStatus = useSelector(state => state.schedule.currentSchedule.status);
   const theme = useTheme()
   const [open, setOpen] = React.useState(true)
   const [openPublishDialog, setOpenPublishDialog] = React.useState(false)
@@ -87,18 +91,38 @@ export default function SchedulePage() {
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, fontFamily: 'Poppins' }}>
             {schedule.title}
           </Typography>
-          <Button  
-            onClick={handleOpenDialog} 
-            variant="contained" 
-            color="secondary" 
-            sx={{fontFamily: 'Poppins', marginBottom: 2, marginTop: 2, marginRight: 4 }}
-            endIcon={<SendIcon/>}>
-            Publish
-          </Button>
-          <PublishAlertDialog
-            open={openPublishDialog}
-            handleClose={handleDialogClose}
-          />
+          {
+            user._id === schedule.creator._id && (
+              scheduleStatus === ScheduleStatus.PRIVATE ?
+                (
+                  <><Button
+                    onClick={handleOpenDialog}
+                    variant="contained"
+                    color="secondary"
+                    sx={{ fontFamily: 'Poppins', marginBottom: 2, marginTop: 2, marginRight: 4 }}
+                    disabled={user._id !== schedule.creator._id}
+                    endIcon={<SendIcon />}>
+                    Publish
+                  </Button><PublishAlertDialog
+                      open={openPublishDialog}
+                      handleClose={handleDialogClose} /></>
+                ) :
+                (
+                  <><Button
+                    onClick={handleOpenDialog}
+                    variant="contained"
+                    color="secondary"
+                    sx={{ fontFamily: 'Poppins', marginBottom: 2, marginTop: 2, marginRight: 4 }}
+                    disabled={user._id !== schedule.creator._id}
+                    endIcon={<CheckCircleOutlineOutlinedIcon />}>
+                    Published
+                  </Button><UnPublishAlertDialog
+                      open={openPublishDialog}
+                      handleClose={handleDialogClose} /></>
+                )
+            )
+          }
+          
           <Link to="/profile">
             <NameAvatar border name={user.name}/>
           </Link>

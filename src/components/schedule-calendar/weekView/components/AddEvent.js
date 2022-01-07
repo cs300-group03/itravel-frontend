@@ -2,6 +2,8 @@ import React from 'react';
 import {Input, DatePicker} from 'antd';
 import moment from 'moment';
 import {inputStyles} from '../styles';
+import { setEnd, setStart, setTitle } from '../../../../store/schedule';
+import store from '../../../../store';
 
 const {RangePicker} = DatePicker;
 
@@ -11,7 +13,6 @@ function AddEvent (props) {
       <Input
         // type="text"
         placeholder="Add Title"
-        value={props.title}
         style={inputStyles}
         size="large"
         autoFocus={true}

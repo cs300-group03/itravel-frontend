@@ -52,7 +52,7 @@ export default function Hero() {
   const classes = useStyles();
   const fetchList = useRef(false);
   const [destination, setDestination] = useState('');
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState(2);
   const [filter, setFilter] = useState(0);
   const [locations, setLocations] = useState([]);
   const [filterDuration, setFilterDuration] = useState(true);
@@ -163,7 +163,7 @@ export default function Hero() {
           <Grid item>
             <TextField
               type="number"
-              defaultValue={2}
+              value={duration}
               size="small"
               variant="outlined"
               sx={style.searchBox}

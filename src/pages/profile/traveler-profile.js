@@ -6,9 +6,9 @@ import ScheduleCard from '../../components/schedule-card/creator-view'
 import { Link } from 'react-router-dom';
 import './style.css'
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../../components/header/Header';
 import { mySchedules } from '../../services'
 import { setSchedules } from '../../store/schedule'
+import Header from '../../components/Header/Header'
 
 const TravelerProfile = () => {
   const myScheduleList = useSelector(state => state.schedule.mySchedules);

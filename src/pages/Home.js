@@ -5,7 +5,7 @@ import ScrollToTop from "../components/ScrollToTop";
 import Services from "../components/Recommend/RecommendLocations";
 import FeaturedSchedules from "../components/featuredSchedules/featuredSchedules";
 import Addition from "../components/footer/homeAddition";
-import Header from "../components/header/Header";
+import Header from "../components/Header/Header";
 
 export default function Home() {
   useEffect(() => {

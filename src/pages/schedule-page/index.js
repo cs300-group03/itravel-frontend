@@ -1,22 +1,19 @@
 import * as React from 'react'
-import { styled, useTheme } from '@mui/material/styles'
-import Avatar from '@mui/material/Avatar'
+import { useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import CssBaseline from '@mui/material/CssBaseline'
 import Toolbar from '@mui/material/Toolbar'
 import List from '@mui/material/List'
 import Typography from '@mui/material/Typography'
-import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
 import ScheduleCalendar from '../../components/schedule-calendar'
 import { Link } from 'react-router-dom'
-import { Button, ListItemButton, Card } from '@mui/material'
+import { Button, Card } from '@mui/material'
 import SearchAttraction from '../../components/searchbox/search-attraction'
 import SearchService from '../../components/searchbox/search-service'
 import { Main, AppBar, DrawerHeader } from './elements'
@@ -26,6 +23,9 @@ import { useSelector } from 'react-redux'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import DateRangeIcon from '@mui/icons-material/DateRange'
 import NameAvatar from '../../components/name-avatar';
+import SendIcon from '@mui/icons-material/Send';
+import { formatDate } from '../../utils';
+import { getAttractionsAtLocation } from '../../services'
 
 const drawerWidth = 340
 
@@ -35,6 +35,25 @@ export default function SchedulePage() {
   const theme = useTheme()
   const [open, setOpen] = React.useState(true)
   const [openPublishDialog, setOpenPublishDialog] = React.useState(false)
+  const [attractions, setAttractions] = React.useState([]);
+  const fetchAttraction = React.useRef(false);
+  const [attractionSearch, setAttractionSearch] = React.useState('');
+  const [serviceSearch, setServiceSearch] = React.useState('');
+
+  React.useEffect(() => {
+    fetchAttraction.current = true;
+    async function fetchAttractions() {
+      const response = await getAttractionsAtLocation(schedule.destination._id);
+      if (fetchAttraction.current) {
+        setAttractions(response);
+      }
+    }
+    fetchAttractions();
+    return () => {
+      fetchAttraction.current = false;
+    }
+  }, []);
+
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -68,17 +87,19 @@ export default function SchedulePage() {
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, fontFamily: 'Poppins' }}>
             {schedule.title}
           </Typography>
-          <Button onClick={handleOpenDialog} color="inherit" sx={{fontFamily: 'Poppins'}}>
+          <Button  
+            onClick={handleOpenDialog} 
+            variant="contained" 
+            color="secondary" 
+            sx={{fontFamily: 'Poppins', marginBottom: 2, marginTop: 2, marginRight: 4 }}
+            endIcon={<SendIcon/>}>
             Publish
           </Button>
           <PublishAlertDialog
             open={openPublishDialog}
             handleClose={handleDialogClose}
           />
-          <Button color="inherit" sx={{ mr: 2 }}>
-            Share
-          </Button>
-          <Link to="\">
+          <Link to="/profile">
             <NameAvatar border name={user.name}/>
           </Link>
         </Toolbar>
@@ -99,8 +120,7 @@ export default function SchedulePage() {
         <DrawerHeader>
           <Box
             component="img"
-            // src={schedule.img}
-            src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/12/61/e5.jpg"
+            src={schedule.img}
             sx={{ height: 145, position: 'relative', width: '100%' }}
           ></Box>
           <IconButton
@@ -131,12 +151,12 @@ export default function SchedulePage() {
             mr: 'auto',
           }}
         >
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}>
             <Typography
               component="div"
               sx={{ fontSize: 20, textAlign: 'center', fontWeight: '600' }}
             >
-              Trip to Nha Trang Yay!!
+              {schedule.title}
             </Typography>
 
             <Box
@@ -149,7 +169,7 @@ export default function SchedulePage() {
             >
               <DateRangeIcon></DateRangeIcon>
               <Typography sx={{ fontSize: 11, ml: 1 }}>
-                22 Dec, 2020 - 28 Dec, 2020
+              {formatDate(schedule.startDate)} - {formatDate(schedule.endDate)}
               </Typography>
             </Box>
             <Box
@@ -161,31 +181,31 @@ export default function SchedulePage() {
               }}
             >
               <LocationOnIcon></LocationOnIcon>
-              <Typography sx={{ fontSize: 11, ml: 1 }}> Dalat </Typography>
+              <Typography sx={{ fontSize: 11, ml: 1 }}>{schedule.destination.name}</Typography>
             </Box>
           </Box>
         </Card>
         <Box sx={{ display:"flex", flexDirection: "column",  padding: 3 }}>
-        <SearchAttraction />
+        <SearchAttraction setText={setAttractionSearch}/>
           <List spacing="2">
-            <ListItem>
-              <SearchResultCard
-                title={'Valley of Love'}
-                address={'357 Mai Anh Dao, Da Lat, Lam Dong'}
-                img={
-                  'https://www.vietnamonline.com/media/uploads/froala_editor/images/VNO-tlty1.jpg'
-                }
-              />
-            </ListItem>
-            <ListItem>
-              <SearchResultCard
-                title={'Hon Mun'}
-                address={'Hon Mun, Vinh Nguyen, Nha Trang City, Khanh Hoa'}
-                img={
-                  'https://vinhnhatrang.net/wp-content/uploads/2019/10/hon-mun-1.jpg'
-                }
-              />
-            </ListItem>
+            {
+              attractions.length === 0 ?
+                (<h6>No attractions. Sorry!</h6>)
+                :
+                attractions.map((attraction) => {
+                  if (attraction.name.trim().toLowerCase().includes(attractionSearch.trim().toLowerCase()))
+                    return (
+                      <ListItem>
+                        <SearchResultCard
+                          title={attraction.name}
+                          address={attraction.address}
+                          img={attraction.img}
+                        />
+                      </ListItem>
+                    );
+                  else return null;
+                })
+            }
           </List>
           <SearchService />
           <List>

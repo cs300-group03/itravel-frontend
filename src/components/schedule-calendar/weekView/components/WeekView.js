@@ -58,14 +58,16 @@ class WeekView extends Component {
    * @param {number} time - Time of the cell the user clicked
   */
   openAddEventModal = (dateStamp, time) => {
-    const start = moment (dateStamp).set ('hour', time);
-    const end = start.clone ().add (1, 'hour');
+    if (this.props.canEdit) {
+      const start = moment (dateStamp).set ('hour', time);
+      const end = start.clone ().add (1, 'hour');
 
-    this.setState ({
-      showAddEventModal: true,
-      eventStart: +start,
-      eventEnd: +end,
+      this.setState ({
+        showAddEventModal: true,
+        eventStart: +start,
+        eventEnd: +end,
     });
+    }
   };
 
   /**

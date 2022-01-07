@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import WeekView from './weekView';
 import CalendarEventHandler from './event-handler';
+import { ThreeSixty } from '@mui/icons-material';
 
 class ScheduleCalendar extends Component {
   constructor (props) {
@@ -14,6 +15,8 @@ class ScheduleCalendar extends Component {
     window.addEventListener ('beforeunload', () => {
       localStorage.setItem ('events', JSON.stringify (this.state.events));
     });
+
+    this.canEdit = false; 
   }
 
   addNewEvent = event => {
@@ -48,14 +51,20 @@ class ScheduleCalendar extends Component {
 
   render () {
     const {events} = this.state;
-    return (
+    if (this.canEdit){
+      return (
       <WeekView
-        events={events}
-        onNewEvent={this.addNewEvent}
-        onEventUpdate={this.updateEvent}
-        onEventDelete={this.deleteEvent}
-      />
-    );
+          events={events}
+          onNewEvent={this.addNewEvent}
+          onEventUpdate={this.updateEvent}
+          onEventDelete={this.deleteEvent}/>
+      )
+    }
+    else {
+      return (
+        <WeekView events={events} canEdit={this.canEdit}/> 
+      )
+    }
   }
 }
 

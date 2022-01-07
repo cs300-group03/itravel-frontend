@@ -11,6 +11,8 @@ import { Lock, LockOpen, MoreVertOutlined } from '@mui/icons-material'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { Link } from 'react-router-dom'
+import PublishAlertDialog from '../dialog/publish-dialog'
+import UnPublishAlertDialog from '../dialog/unpublish-dialog'
 
 const style = {
   dateStyle: {
@@ -26,11 +28,21 @@ const style = {
 export default function ScheduleCard({ schedule }) {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const [openPublishDialog, setOpenPublishDialog] = React.useState(false)
+  const handleOpenDialog = () => {
+    setOpenPublishDialog(true)
+  }
+
+  const handleDialogClose = () => {
+    setOpenPublishDialog(false)
   }
 
   return (
@@ -68,13 +80,14 @@ export default function ScheduleCard({ schedule }) {
           </Box>
 
           <Box sx={{ alignItems: 'center', marginLeft: 6 }}>
-            <IconButton>
+            <IconButton onClick={handleOpenDialog}>
               {schedule.status === 'publish' ? (
                 <LockOpen fontSize="small"></LockOpen>
               ) : (
                 <Lock></Lock>
               )}
             </IconButton>
+
             <IconButton
               id="basic-button"
               aria-controls={open ? 'basic-menu' : undefined}
@@ -84,6 +97,17 @@ export default function ScheduleCard({ schedule }) {
             >
               <MoreVertOutlined fontSize="small"></MoreVertOutlined>
             </IconButton>
+            {schedule.status === 'publish' ? (
+              <PublishAlertDialog
+                open={openPublishDialog}
+                handleClose={handleDialogClose}
+              />
+            ) : (
+              <UnPublishAlertDialog
+                open={openPublishDialog}
+                handleClose={handleDialogClose}
+              />
+            )}
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}

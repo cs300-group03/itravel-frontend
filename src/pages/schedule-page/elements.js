@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 
-const drawerWidth = 290;
+const drawerWidth = 340;
 
 export const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -42,9 +42,9 @@ export const AppBar = styled(MuiAppBar, {
 export const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(0, 1),
+  padding: theme.spacing(0, 0,0, 0),
   // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
+  //...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
 

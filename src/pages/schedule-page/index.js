@@ -16,13 +16,13 @@ import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import ScheduleCalendar from '../../components/schedule-calendar'
 import { Link } from 'react-router-dom'
-import { Button } from '@mui/material'
+import { Button, ListItemButton } from '@mui/material'
 import SearchAttraction from '../../components/searchbox/search-attraction'
 import SearchService from '../../components/searchbox/search-service'
 import { Main, AppBar, DrawerHeader } from './elements'
 import PublishAlertDialog from '../../components/dialog/publish-dialog'
-
-const drawerWidth = 290
+import SearchResultCard from '../../components/searchResultCard'
+const drawerWidth = 340
 
 export default function SchedulePage({ schedule }) {
   const theme = useTheme()
@@ -64,7 +64,10 @@ export default function SchedulePage({ schedule }) {
           <Button onClick={handleOpenDialog} color="inherit">
             Publish
           </Button>
-          <PublishAlertDialog open={openPublishDialog} handleClose={handleDialogClose} />
+          <PublishAlertDialog
+            open={openPublishDialog}
+            handleClose={handleDialogClose}
+          />
           <Button color="inherit" sx={{ mr: 2 }}>
             Share
           </Button>
@@ -87,7 +90,21 @@ export default function SchedulePage({ schedule }) {
         open={open}
       >
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <Box
+            component="img"
+            src={schedule.img}
+            sx={{ height: 150, position: 'relative', width: '100%' }}
+          ></Box>
+          <IconButton
+            onClick={handleDrawerClose}
+            sx={{
+              color: 'black',
+              zIndex: '2',
+              position: 'absolute',
+              right: 0,
+              top: 0,
+            }}
+          >
             {theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
             ) : (
@@ -95,24 +112,50 @@ export default function SchedulePage({ schedule }) {
             )}
           </IconButton>
         </DrawerHeader>
-        <Divider />
-        <SearchAttraction />
-        <List>
-          {['Da Lat', 'Sapa', 'Vung Tau'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
+        <Box sx={{ padding: 3 }}>
+          <SearchAttraction />
+          <List spacing="2">
+            <ListItem>
+              <SearchResultCard
+                title={'Valley of Love'}
+                address={'357 Mai Anh Dao, Da Lat, Lam Dong'}
+                img={
+                  'https://www.vietnamonline.com/media/uploads/froala_editor/images/VNO-tlty1.jpg'
+                }
+              />
             </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <SearchService />
-        <List>
-          {['Restaurant', 'Hotel', 'Caferia'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
+            <ListItem>
+              <SearchResultCard
+                title={'Hon Mun'}
+                address={'Hon Mun, Vinh Nguyen, Nha Trang City, Khanh Hoa'}
+                img={
+                  'https://vinhnhatrang.net/wp-content/uploads/2019/10/hon-mun-1.jpg'
+                }
+              />
             </ListItem>
-          ))}
-        </List>
+          </List>
+          <SearchService />
+          <List>
+            <ListItem>
+              <SearchResultCard
+                title={'Sandals Restaurant'}
+                address={'72-74 Tran Phu, Nha Trang'}
+                img={
+                  'https://localinsider.storage.googleapis.com/size/w1000/2021/10/DSC_2460-scaled.jpg'
+                }
+              />
+            </ListItem>
+            <ListItem>
+              <SearchResultCard
+                title={'Vinpearl Luxury'}
+                address={'73 Hung Vuong, Nha Trang'}
+                img={
+                  'https://media.expedia.com/hotels/5000000/4430000/4424400/4424377/3e681f92_z.jpg'
+                }
+              />
+            </ListItem>
+          </List>
+        </Box>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />

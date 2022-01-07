@@ -30,6 +30,10 @@ const theme = createTheme({
     neutral: {
       main: '#ffffff',
     },
+    black: '#000000'
+  },
+  typography: {
+    fontFamily: "Poppins"
   },
 })
 

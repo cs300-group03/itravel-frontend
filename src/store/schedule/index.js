@@ -3,18 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const scheduleSlice = createSlice({
     name: 'schedule',
     initialState: {
-        mySchedules: [],
-        currentSchedule: null,
-        allSchedules: [], // for admin
-        filteredSchedules: [],
+        currentSchedule: '',
     },
     reducers: {
-        getMySchedulesRequest: (state) => {},
-        getMySchedulesSuccess: (state, action) => {},
-        getMyScheduleFailure: (state, action) => {},
-        getAllSchedulesRequest: (state) => {},
-        getAllSchedulesSuccess: (state, action) => {},
-        getAllSchedulesFailure: (state) => {},
+        setCurrentSchedule: (state, action) => {
+            state.currentSchedule = action.payload;
+        },
     },
 });
 
+export const { setCurrentSchedule } = scheduleSlice.actions;
+export const scheduleReducer = scheduleSlice.reducer;

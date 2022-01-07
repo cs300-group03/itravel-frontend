@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ErrorAlert from '../../components/error-alert';
 import { logIn } from '../../services';
-import { setUser, setUserEmail } from '../../store/auth';
+import { setAuthorized, setUser, setUserEmail } from '../../store/auth';
 
 const LoginPage = () => {
   // const classes = useStyles()
@@ -53,8 +53,7 @@ const LoginPage = () => {
         setLoginError(response.message);
       } else {
         dispatch(setUser(response));
-        console.log(response);
-        console.log(localStorage.getItem('token'));
+        dispatch(setAuthorized(true));
         navigate('/');
       }
     }

@@ -22,6 +22,7 @@ import TravelerProfile from './pages/profile/traveler-profile';
 import ServiceProviderProfilePage from './pages/profile/service-provider';
 import SchedulePage from './pages/schedule-page';
 import CreateSchedulePage from './pages/create-schedule';
+import PublishSchedulePage from './pages/publish-schedule-page';
 
 const theme = createTheme({
   spacing: 4,
@@ -128,11 +129,12 @@ function App() {
     <React.StrictMode>
       <ThemeProvider theme={theme}>
         <Router>
-          <Routes>
+          {/* <Routes>
             {
               routes.map((route) => renderRoute(route))
             }
-          </Routes>
+          </Routes> */}
+          <PublishSchedulePage />
         </Router>
       </ThemeProvider>
     </React.StrictMode>

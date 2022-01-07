@@ -16,17 +16,17 @@ import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import ScheduleCalendar from '../../components/schedule-calendar'
 import { Link } from 'react-router-dom'
-import { Button, ListItemButton } from '@mui/material'
+import { Button } from '@mui/material'
 import SearchAttraction from '../../components/searchbox/search-attraction'
 import SearchService from '../../components/searchbox/search-service'
-import { Main, AppBar, DrawerHeader } from './elements'
+import { Main, AppBar, DrawerHeader } from '../schedule-page/elements'
 import PublishAlertDialog from '../../components/dialog/publish-dialog'
 import SearchResultCard from '../../components/searchResultCard'
 import { useSelector } from 'react-redux'
 
 const drawerWidth = 340
 
-export default function SchedulePage() {
+export default function PublishSchedulePage() {
   const schedule = useSelector(state => state.schedule.currentSchedule);
   const theme = useTheme()
   const [open, setOpen] = React.useState(true)
@@ -62,17 +62,17 @@ export default function SchedulePage() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            {schedule.title}
+            {/* {schedule.title} */} My Trip To DaLat
           </Typography>
           <Button onClick={handleOpenDialog} color="inherit">
-            Publish
+            Save
           </Button>
           <PublishAlertDialog
             open={openPublishDialog}
             handleClose={handleDialogClose}
           />
           <Button color="inherit" sx={{ mr: 2 }}>
-            Share
+            Duplicate
           </Button>
           <Link to="\">
             <Avatar src="https://icdn.dantri.com.vn/2017/emma-watson-5-1488809769584.jpg" />

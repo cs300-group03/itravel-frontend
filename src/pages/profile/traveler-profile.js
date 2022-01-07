@@ -7,7 +7,7 @@ import schedule from '../../data/schedule'
 import { Link } from 'react-router-dom';
 import './style.css'
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../../components/Header/Header';
+import Header from '../../components/header/Header';
 import { mySchedules } from '../../services'
 import { setSchedules } from '../../store/schedule'
 

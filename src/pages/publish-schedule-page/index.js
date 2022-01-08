@@ -19,10 +19,12 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 import CardContent from '@mui/material/CardContent'
 import { useSelector } from 'react-redux'
 import { ThumbDown, ThumbUp } from '@mui/icons-material'
-
+import NameAvatar from '../../components/name-avatar'
+import { formatDate } from '../../utils';
 const drawerWidth = 340
 
 export default function PublishSchedulePage() {
+  const user = useSelector(state => state.auth.user);
   const schedule = useSelector((state) => state.schedule.currentSchedule)
   const theme = useTheme()
   const [open, setOpen] = React.useState(true)
@@ -49,7 +51,7 @@ export default function PublishSchedulePage() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            {/* {schedule.title} */} My Trip To DaLat
+            {schedule.title}
           </Typography>
           <IconButton color="neutral" aria-label="upvote" component="span">
             <ThumbUp />
@@ -60,7 +62,7 @@ export default function PublishSchedulePage() {
             <Typography sx={{ ml: 2, fontSize: 20, mr: 2 }}>2</Typography>
           </IconButton>
           <Link to="\">
-            <Avatar src="https://icdn.dantri.com.vn/2017/emma-watson-5-1488809769584.jpg" />
+            <NameAvatar name={user.name}/>
           </Link>
         </Toolbar>
       </AppBar>
@@ -81,7 +83,7 @@ export default function PublishSchedulePage() {
           <Box
             component="img"
             // src={schedule.img}
-            src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/12/61/e5.jpg"
+            src={schedule.img}
             sx={{ height: 150, position: 'relative', width: '100%' }}
           ></Box>
           <IconButton
@@ -117,7 +119,7 @@ export default function PublishSchedulePage() {
               component="div"
               sx={{ fontSize: 20, textAlign: 'center', fontWeight: '600' }}
             >
-              Trip to Nha Trang Yay!!
+             {schedule.title}
             </Typography>
 
             <Box
@@ -130,7 +132,7 @@ export default function PublishSchedulePage() {
             >
               <DateRangeIcon></DateRangeIcon>
               <Typography sx={{ fontSize: 11, ml: 1 }}>
-                22 Dec, 2020 - 28 Dec, 2020
+                {formatDate(schedule.startDate)} - {formatDate(schedule.endDate)}
               </Typography>
             </Box>
             <Box
@@ -142,7 +144,7 @@ export default function PublishSchedulePage() {
               }}
             >
               <LocationOnIcon></LocationOnIcon>
-              <Typography sx={{ fontSize: 11, ml: 1 }}> Dalat </Typography>
+              <Typography sx={{ fontSize: 11, ml: 1 }}> {schedule.destination.name} </Typography>
             </Box>
           </Box>
         </Card>
@@ -152,9 +154,9 @@ export default function PublishSchedulePage() {
           <Box
             sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', mt: 2}}
           >
-            <Avatar src="https://kenh14cdn.com/thumb_w/660/2019/4/24/e-1556084674630222748642.jpg" />
+            <NameAvatar name={schedule.creator.name}/>
             <Typography sx={{ fontSize: 12, ml: 1, fontWeight: '500' }}>
-              Shawn Mendes
+              {schedule.creator.name}
             </Typography>
           </Box>
           <Typography
@@ -163,13 +165,7 @@ export default function PublishSchedulePage() {
             component="div"
             sx={{ fontSize: 10, padding: 2 }}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum
+            {schedule.description}
           </Typography>
           <Button
             sx={{ mt: 2, mr: 'auto', ml: 'auto', width: '70%' }}

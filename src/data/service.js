@@ -33,25 +33,25 @@ export const getIcon = ({ serviceType, m, s, c }) => {
   if (c) style.color = c
   let _icon
   switch (serviceType) {
-    case type.ACCOMMODATION:
+    case type.ACCOMMODATION.value:
       _icon = <Bed sx={style} />
       break
-    case type.ATTRACTION:
+    case type.ATTRACTION.value:
       _icon = <Attractions sx={style} />
       break
-    case type.CAFES:
+    case type.CAFES.value:
       _icon = <LocalCafe sx={style} />
       break
-    case type.FLIGHT:
+    case type.FLIGHT.value:
       _icon = <Flight sx={style} />
       break
-    case type.MOTOBIKE:
+    case type.MOTOBIKE.value:
       _icon = <TwoWheeler sx={style} />
       break
-    case type.RESTAURANT:
+    case type.RESTAURANT.value:
       _icon = <Restaurant sx={style} />
       break
-    case type.TRAIN:
+    case type.TRAIN.value:
       _icon = <Train sx={style} />
       break
     default:

@@ -3,7 +3,7 @@ import { Avatar } from "@mui/material";
 const NameAvatar = ({ name, border, onClick = () => {} }) => {
     const ascii = name.charCodeAt(0) % 2;
     let background;
-    if (ascii === 0)
+    if (ascii === 1)
         background = 'primary.main';
     else
         background = 'secondary.main';

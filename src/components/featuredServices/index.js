@@ -14,6 +14,7 @@ export default function FeaturedServices() {
     fetchList.current = true;
     async function fetchServices() {
       const response = await getAllProducts();
+      console.log(response);
       if (response && fetchList.current) {
         setAllServices(response);
       };

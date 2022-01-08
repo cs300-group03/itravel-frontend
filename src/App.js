@@ -25,6 +25,7 @@ import CreateSchedulePage from './pages/create-schedule';
 import ExplorePage from './pages/explore-page';
 import ServiceInfoPage from './pages/service-info';
 import CreateServicePage from './pages/create-service';
+import PublishSchedulePage from './pages/publish-schedule-page';
 
 const theme = createTheme({
   spacing: 4,
@@ -50,6 +51,8 @@ const theme = createTheme({
 function App() {
   const isAuthorized = useSelector(state => state.auth.isAuthorized);
   const userRole = useSelector(state => state.auth.user.type);
+  const user = useSelector(state => state.auth.user);
+  const currentSchedule = useSelector(state => state.schedule.currentSchedule);
   const [trash, setTrash] = React.useState('');
   const dispatch = useDispatch();
 
@@ -116,7 +119,7 @@ function App() {
       isPrivate: true,
     },
     {
-      element: <SchedulePage/>,
+      element: (user._id === currentSchedule.creator._id ? <SchedulePage/> : <PublishSchedulePage/>),
       path: '/schedule',
       isPrivate: true,
     },

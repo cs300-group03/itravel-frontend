@@ -6,7 +6,7 @@ import { MoreHoriz, Place, AttachMoney } from '@mui/icons-material'
 import { Link as RouterLink } from 'react-router-dom'
 
 const ServiceCard = ({ service }) => {
-  let _icon = getIcon({ serviceType: service.type, m: 5, s: 36 })
+  let _icon = getIcon({ serviceType: service.category, m: 5, s: 36 })
   return (
     <Box sx={style.container}>
       <Box component="img" sx={style.image} src={service.img[0]} />

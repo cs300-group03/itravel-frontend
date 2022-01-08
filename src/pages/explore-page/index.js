@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Hero from '../../components/HeroSection/HeroSection'
 import scrollreveal from 'scrollreveal'
 import ScrollToTop from '../../components/ScrollToTop'
@@ -11,8 +11,11 @@ import IconButton from '@mui/material/IconButton'
 import SearchIcon from '@mui/icons-material/Search'
 import Paper from '@mui/material/Paper'
 import InputBase from '@mui/material/InputBase'
+import { getAllProducts } from '../../services'
+import Header from '../../components/Header/Header'
 
 export default function Explore() {
+
   useEffect(() => {
     const sr = scrollreveal({
       origin: 'top',
@@ -36,6 +39,7 @@ export default function Explore() {
   }, [])
   return (
     <div>
+      <Header/>
       <ScrollToTop />
       <Section id="title">
         <div className="title">

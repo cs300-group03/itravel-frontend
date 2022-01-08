@@ -2,15 +2,34 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import service from "../../data/service";
 import PublishServiceCard from "../publish-service-card";
+import { useRef, useEffect } from "react";
+import { getAllProducts } from '../../services';
 
 export default function FeaturedServices() {
   const services = [service, service, service, service]
+  const fetchList = useRef(false);
+  const [allServices, setAllServices] = useState([]);
+
+  useEffect(() => {
+    fetchList.current = true;
+    async function fetchServices() {
+      const response = await getAllProducts();
+      if (response && fetchList.current) {
+        setAllServices(response);
+      };
+    }
+    fetchServices();
+    return () => {
+      fetchList.current = false;
+    }
+  }, []);
+
   const [active, setActive] = useState(1);
   return (
     <Section id="recommend">
       
       <div className="destinations">
-        {services.map((service) => {
+        {allServices.map((service) => {
           return (
             <PublishServiceCard service={service}/>
           );

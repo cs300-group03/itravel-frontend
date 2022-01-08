@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Box,
   InputBase,
@@ -10,127 +10,193 @@ import {
   TextField,
 } from '@mui/material'
 import { LocationOn, AttachMoney } from '@mui/icons-material'
-
-import style from './style'
+import Header from '../../components/Header/Header'
 import { type } from '../../data/service'
+import Logo from '../../assets/logo.png';
+import { makeStyles, createStyles } from "@mui/styles";
+import { Grid } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { createService } from '../../services'
+import { MenuItem } from '@mui/material'
+import { getAllLocations } from '../../services'
+import ErrorAlert from '../../components/error-alert';
 
-const categories = [
-  { label: type.ACCOMMODATION },
-  { label: type.ATTRACTION },
-  { label: type.CAFES },
-  { label: type.FLIGHT },
-  { label: type.MOTOBIKE },
-  { label: type.RESTAURANT },
-  { label: type.TRAIN },
-]
+const useStyles = makeStyles((theme) => {
+  return createStyles({
+    root: {
+      minHeight: '100vh',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignContent: 'center',
+    },
+    signUpContainer: {
+      zIndex: 5,
+    },
+    background: {
+        maxWidth: '100%',
+        height: 'auto',
+    },
+    logoHeader: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginBottom: 20,
+    },
+    logo: {
+        width: 50,
+        height: 50,
+    },
+    logoText: {
+        fontSize: 25,
+        margin: 0,
+        padding: 0
+    },
+    title: {
+        alignSelf: 'center',
+    },
+    guidedText: {
+        alignSelf: 'center',
+        marginTop: 10,
+        marginBottom: 0,
+        fontWeight: 300,
+    },
+  });
+});
 
-const FillForm = ({ icon, label }) => {
-  return (
-    <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
-      <OutlinedInput
-        color="secondary"
-        startAdornment={
-          <InputAdornment position="start">
-            {icon()}
-            <Box component="span" sx={style.detail}>
-              {label}
-            </Box>
-          </InputAdornment>
-        }
-      />
-    </FormControl>
-  )
-}
+const style = {
+  authButton: {
+      paddingTop: 2,
+      paddingBottom: 2,
+      paddingStart: 10,
+      paddingEnd: 10,
+      marginTop: 2,
+      fontFamily: 'Poppins',
+  },
+  infoContainer: {
+      marginTop: 2,
+      marginBottom: 2,
+  }
+};
 
 const CreateServicePage = () => {
+  const classes = useStyles();
+  const [location, setLocation] = useState('');
+  const [locations, setLocations] = React.useState([]);
+  const [price, setPrices] = useState(40);
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('');
+  const navigate = useNavigate();
+  const fetchLocation = React.useRef(false);
+  const [error, setError] = useState('');
+
+  const toLandingPage = () => {
+    navigate('/landing');
+  }
+
+  const handleChange = (type) => {
+    return (e) => {
+      const value = e.target.value;
+      if (type === 'location') setLocation(value);
+      else if (type === 'price') setPrices(value);
+      else if (type === 'name') setName(value);
+      else if (type === 'cate') setCategory(value);
+    }
+  }
+
+  async function createServiceFunc() {
+    const response = await createService(location, price, name, category);
+    if (response)
+      navigate('/profile');
+    else {
+      setError('Cannot create service.')
+    }
+  }
+
+  React.useEffect(() => {
+    fetchLocation.current = true;
+    async function getLocations() {
+      const response = await getAllLocations();
+      setLocations(response);
+    }
+    getLocations();
+    return () => {
+      fetchLocation.current = false;
+    };
+  }, []);
+
   return (
-    <Box sx={style.container} component="form" noValidate autoComplete="off">
-      <InputBase
-        fullWidth
-        sx={style.title}
-        textAlign="center"
-        placeholder="Enter Service Name"
-        // inputProps={{ 'aria-label': 'search google maps' }}
-      />
-      <Box
-        sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}
-      >
-        <Box sx={{ display: 'flex', flexDirection: 'column', m: 5 }}>
-          <FillForm
-            label={'Location'}
-            icon={() => <LocationOn sx={style.icon} />}
-          />
-          <FillForm
-            label={'Price'}
-            icon={() => <AttachMoney sx={style.icon} />}
-          />
-          <FormControl fullWidth sx={{ mx: 5, mb: 5 }}>
-            <OutlinedInput
-              color="secondary"
-              startAdornment={
-                <InputAdornment position="start">
-                  <Box component="span" sx={style.detail}>
-                    Description
-                  </Box>
-                </InputAdornment>
-              }
-              multiline
-              rows={4}
-            />
-          </FormControl>
-        </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'column', m: 5 }}>
-          <Autocomplete
-            options={categories}
-            sx={{ mx: 5, mb: 5, width: 400 }}
-            autoHighlight
-            getOptionLabel={(option) => option.label}
-            renderOption={(props, option) => (
-              <Box
-                component="li"
-                // sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                {...props}
-              >
-                {option.label}
-              </Box>
-            )}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                color="secondary"
-                InputProps={{
-                  ...params.InputProps,
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Box component="span" sx={style.detail}>
-                        Category
-                      </Box>
-                    </InputAdornment>
-                  ),
-                }}
-                variant="outlined"
-              />
-            )}
-          />
-        </Box>
-      </Box>
-      <Box>
-        <Button
-          fullWidth
-          variant="contained"
-          sx={{
-            fontFamily: 'Poppins',
-            textTransform: 'none',
-            color: '#ffffff',
-            fontSize: 24,
-            borderRadius: 15,
-            paddingX: 20,
-          }}
-        >
-          Go Public!
-        </Button>
-      </Box>
-    </Box>
+    <Grid container className={classes.root}>
+      <ErrorAlert errorMessage={error} setErrorMessage={setError}/>
+      <Grid item xs={4} className={classes.signUpContainer} container direction="column">
+                <div 
+                    className={classes.logoHeader}
+                    onClick={toLandingPage}>
+                    <img className={classes.logo} src={Logo} alt='Logo'/>
+                    <h3 className={classes.logoText}>iTravel</h3>
+                </div>
+                <h3 className={classes.title}>Create a service!</h3>
+                <TextField
+                    sx={style.infoContainer}
+                    required 
+                    label="Name" 
+                    value={name}
+                    variant="outlined" 
+                    color="secondary"
+                    onChange={handleChange('name')}/>
+                <TextField
+                  sx={style.inputContainer}
+                  select
+                  required
+                  label="Location"
+                  variant="outlined"
+                  color="secondary"
+                  value={location}
+                  onChange={handleChange('location')}
+                >
+                  {
+                    locations.map((location) => (
+                      <MenuItem key={location._id} value={location._id}>
+                        {location.name}
+                      </MenuItem>
+                    ))
+                  }
+                </TextField>
+                <TextField
+                    sx={style.infoContainer}
+                    required 
+                    label="Price" 
+                    variant="outlined" 
+                    color="secondary"
+                    inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                    onChange={handleChange('price')}/>
+                <TextField
+                  sx={style.inputContainer}
+                  select
+                  required
+                  label="Category"
+                  variant="outlined"
+                  color="secondary"
+                  value={category}
+                  onChange={handleChange('cate')}
+                >
+                  {
+                    Object.keys(type).map((key) => (
+                      <MenuItem key={type[key].value} value={type[key].value}>
+                        {type[key].label}
+                      </MenuItem>
+                    ))
+                  }
+                </TextField>
+
+                <Button
+                    variant="contained"
+                    sx={style.authButton}
+                    onClick={createServiceFunc}>
+                    Go public!
+                </Button>
+            </Grid>
+    </Grid>
   )
 }
 

@@ -56,18 +56,10 @@ const LoginPage = () => {
     weightRange: '',
     showPassword: false,
   });
-
-  const defaultEmail = useSelector((state) => state.auth.user.email);
-  const [trash, setTrash] = React.useState(null);
   const [loginError, setLoginError] = React.useState('');
   const [loginRequest, setLoginRequest] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    setValues({...values, email: defaultEmail });
-    dispatch(setUserEmail(''));
-  }, [trash]);
 
   React.useEffect(() => {
     async function loginFunc() {

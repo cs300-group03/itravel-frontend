@@ -47,7 +47,7 @@ const authSlice = createSlice({
                 state.user.downvoted.push(action.payload);
             };
         },
-        resetLogout: (state) => {
+        resetLogoutAuth: (state) => {
             state ={ 
                 user: {
                     email: '',
@@ -59,5 +59,5 @@ const authSlice = createSlice({
     },
 });
 
-export const { setUserEmail, setUser, setAuthorized, upvote, downvote } = authSlice.actions;
+export const { setUserEmail, setUser, setAuthorized, upvote, downvote, resetLogoutAuth } = authSlice.actions;
 export const authReducer = authSlice.reducer;

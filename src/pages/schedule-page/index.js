@@ -12,7 +12,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ListItem from '@mui/material/ListItem'
 import ScheduleCalendar from '../../components/schedule-calendar'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Card } from '@mui/material'
 import SearchAttraction from '../../components/searchbox/search-attraction'
 import SearchService from '../../components/searchbox/search-service'
@@ -43,6 +43,7 @@ export default function SchedulePage() {
   const fetchAttraction = React.useRef(false);
   const [attractionSearch, setAttractionSearch] = React.useState('');
   const [serviceSearch, setServiceSearch] = React.useState('');
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     fetchAttraction.current = true;
@@ -72,6 +73,10 @@ export default function SchedulePage() {
 
   const handleDialogClose = () => {
     setOpenPublishDialog(false)
+  }
+
+  const goHome = () => {
+    navigate('/profile');
   }
 
   return (
@@ -123,9 +128,7 @@ export default function SchedulePage() {
             )
           }
           
-          <Link to="/profile">
-            <NameAvatar border name={user.name}/>
-          </Link>
+          <NameAvatar onClick={goHome} border name={user.name}/>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -210,48 +213,46 @@ export default function SchedulePage() {
           </Box>
         </Card>
         <Box sx={{ display:"flex", flexDirection: "column",  padding: 3 }}>
-        <SearchAttraction setText={setAttractionSearch}/>
-          <List spacing="2">
-            {
-              attractions.length === 0 ?
-                (<h6>No attractions. Sorry!</h6>)
-                :
-                attractions.map((attraction) => {
-                  if (attraction.name.trim().toLowerCase().includes(attractionSearch.trim().toLowerCase()))
-                    return (
+
+        {
+          user._id !== schedule.creator._id ?
+            (<Card>{schedule.description}</Card>)
+            :
+            (
+              <><SearchAttraction setText={setAttractionSearch} /><List spacing="2">
+                    {attractions.length === 0 ?
+                      (<h6>No attractions. Sorry!</h6>)
+                      :
+                      attractions.map((attraction) => {
+                        if (attraction.name.trim().toLowerCase().includes(attractionSearch.trim().toLowerCase()))
+                          return (
+                            <ListItem>
+                              <SearchResultCard
+                                title={attraction.name}
+                                address={attraction.address}
+                                img={attraction.img} />
+                            </ListItem>
+                          )
+                        else
+                          return null
+                      })}
+                  </List><SearchService /><List>
                       <ListItem>
                         <SearchResultCard
-                          title={attraction.name}
-                          address={attraction.address}
-                          img={attraction.img}
-                        />
+                          title={'Sandals Restaurant'}
+                          address={'72-74 Tran Phu, Nha Trang'}
+                          img={'https://localinsider.storage.googleapis.com/size/w1000/2021/10/DSC_2460-scaled.jpg'} />
                       </ListItem>
-                    );
-                  else return null;
-                })
-            }
-          </List>
-          <SearchService />
-          <List>
-            <ListItem>
-              <SearchResultCard
-                title={'Sandals Restaurant'}
-                address={'72-74 Tran Phu, Nha Trang'}
-                img={
-                  'https://localinsider.storage.googleapis.com/size/w1000/2021/10/DSC_2460-scaled.jpg'
-                }
-              />
-            </ListItem>
-            <ListItem>
-              <SearchResultCard
-                title={'Vinpearl Luxury'}
-                address={'73 Hung Vuong, Nha Trang'}
-                img={
-                  'https://media.expedia.com/hotels/5000000/4430000/4424400/4424377/3e681f92_z.jpg'
-                }
-              />
-            </ListItem>
-          </List>
+                      <ListItem>
+                        <SearchResultCard
+                          title={'Vinpearl Luxury'}
+                          address={'73 Hung Vuong, Nha Trang'}
+                          img={'https://media.expedia.com/hotels/5000000/4430000/4424400/4424377/3e681f92_z.jpg'} />
+                      </ListItem>
+                    </List></>
+            )
+        }
+
           
         </Box>
         </Box>

@@ -22,6 +22,9 @@ import TravelerProfile from './pages/profile/traveler-profile';
 import ServiceProviderProfilePage from './pages/profile/service-provider';
 import SchedulePage from './pages/schedule-page';
 import CreateSchedulePage from './pages/create-schedule';
+import ExplorePage from './pages/explore-page';
+import ServiceInfoPage from './pages/service-info';
+import CreateServicePage from './pages/create-service';
 
 const theme = createTheme({
   spacing: 4,
@@ -120,6 +123,21 @@ function App() {
     {
       element: <CreateSchedulePage/>,
       path: '/schedule/create',
+      isPrivate: true,
+    },
+    {
+      element: <ExplorePage/>,
+      path: '/explore',
+      isPrivate: true,
+    },
+    {
+      element: <ServiceInfoPage/>,
+      path: '/service',
+      isPrivate: true,
+    },
+    {
+      element: <CreateServicePage/>,
+      path: 'service/create',
       isPrivate: true,
     }
   ];

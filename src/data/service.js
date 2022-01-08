@@ -12,13 +12,16 @@ import {
 } from '@mui/icons-material'
 
 export const type = {
-  ACCOMMODATION: 'Accommodation',
-  RESTAURANT: 'Restaurant',
-  FLIGHT: 'Flight',
-  TRAIN: 'Train',
-  CAFES: 'Cafes',
-  ATTRACTION: 'Attraction',
-  MOTOBIKE: 'Motobike',
+  ACCOMMODATION: {
+    label: 'Accommodation',
+    value: 0,
+  },
+  RESTAURANT: {label:'Restaurant', value: 1},
+  FLIGHT: {label: 'Flight', value: 2},
+  TRAIN: {label: 'Train', value: 3},
+  CAFES: {label: 'Cafes', value: 4},
+  ATTRACTION: {label: 'Attraction', value: 5},
+  MOTOBIKE: {label: 'Motobike', value: 6},
 }
 
 const unit = {

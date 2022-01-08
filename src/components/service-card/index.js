@@ -9,7 +9,7 @@ const ServiceCard = ({ service }) => {
   let _icon = getIcon({ serviceType: service.type, m: 5, s: 36 })
   return (
     <Box sx={style.container}>
-      <Box component="img" sx={style.image} src={service.images[0]} />
+      <Box component="img" sx={style.image} src={service.img[0]} />
 
       <Box
         sx={{
@@ -20,8 +20,6 @@ const ServiceCard = ({ service }) => {
       >
         <Box sx={style.textContainer}>
           <Link
-            component={RouterLink}
-            to="/service/service-id"
             underline="hover"
             color="secondary"
             sx={style.title}
@@ -31,15 +29,13 @@ const ServiceCard = ({ service }) => {
           <Box sx={style.descriptionContainer}>
             <Place sx={style.icon} />
             <Box component="span" sx={style.description}>
-              Location: {service.location.address} - {service.location.province}{' '}
-              - {service.location.country}
+              Location: {service.location.name}
             </Box>
           </Box>
           <Box sx={style.descriptionContainer}>
             <AttachMoney sx={style.icon} />
             <Box component="span" sx={style.description}>
-              Price: {service.price.from}$ - {service.price.to}$/
-              {service.price.unit}
+              Price: {service.price}$
             </Box>
           </Box>
         </Box>

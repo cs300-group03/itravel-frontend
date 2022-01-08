@@ -7,7 +7,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../assets/logo.png'
 import { useDispatch, useSelector } from 'react-redux'
 import NameAvatar from '../../components/name-avatar';
-import { setUser } from '../../store/auth';
+import { resetLogoutAuth, setUser } from '../../store/auth';
+import { resetLogoutSchedule } from '../../store/schedule';
 
 const useStyles = makeStyles((theme) => {
   return createStyles({
@@ -79,7 +80,8 @@ const Header = () => {
   }
 
   const logout = () => {
-    dispatch(setUser(null));
+    dispatch(resetLogoutAuth());
+    dispatch(resetLogoutSchedule());
     localStorage.setItem('token', '');
     navigate('/landing');
   }
@@ -91,7 +93,7 @@ const Header = () => {
     },
     {
       label: 'Explore services',
-      routeName: '/services',
+      routeName: '/explore',
     },
   ];
 

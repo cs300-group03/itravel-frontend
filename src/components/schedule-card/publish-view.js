@@ -10,8 +10,9 @@ import { CardActionArea, CardActions, makeStyles } from '@mui/material'
 import { ThumbDownAltOutlined, ThumbUpAltOutlined } from '@mui/icons-material'
 import './style.css'
 import NameAvatar from '../../components/name-avatar';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { setCurrentSchedule } from '../../store/schedule'
 
 const style = {
   title: {
@@ -21,7 +22,10 @@ const style = {
 
 const PublishScheduleCard = ({ schedule }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const goSchedule = () => {
+    dispatch(setCurrentSchedule(schedule));  
     navigate('/schedule');
   }
 

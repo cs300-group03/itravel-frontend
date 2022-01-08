@@ -279,7 +279,7 @@ export async function voteSchedule(scheduleId, voteChoice) {
     return false;
 }
 
-export async function publishSchedule(scheduleId, description) {
+export async function publishSchedule(scheduleId, name) {
     const token = localStorage.getItem('token');
     const response = await fetch(`${process.env.REACT_APP_API_URL}/schedule/publish`, {
         method: 'POST',
@@ -289,7 +289,7 @@ export async function publishSchedule(scheduleId, description) {
         },
         body: JSON.stringify({
             scheduleId,
-            description,
+            name,
         }),
     });
     if (response.status === status.OK) {
@@ -310,6 +310,55 @@ export async function fetchEvents(scheduleId) {
     if (response.status === status.OK) {
         const jsonReponse = await response.json();
         return jsonReponse.data.activities;
+    }
+    return [];
+}
+
+export async function createService(location, price, name, category) {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/product/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `bearer ${token}`,
+        },
+        body: JSON.stringify({
+            location, price, name, category,
+        }),
+    });
+    if (response.status === status.OK) {
+        const jsonResponse = await response.json();
+        return jsonResponse.data.product;
+    }
+    return false;
+}
+
+export async function getMyProducts() {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/product/my`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `bearer ${token}`,
+        },
+    });
+    if (response.status === status.OK) {
+        const jsonReponse = await response.json();
+        return jsonReponse.data.products;
+    }
+    return [];
+}
+
+export async function getAllProducts() {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/product/`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': `bearer ${token}`,
+        },
+    });
+    if (response.status === status.OK) {
+        const jsonReponse = await response.json();
+        return jsonReponse.data.products;
     }
     return [];
 }

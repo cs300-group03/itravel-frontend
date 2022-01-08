@@ -10,6 +10,7 @@ import { CardActionArea, CardActions } from '@mui/material'
 import { Rating } from '@mui/material'
 import style from '../service-card/style'
 import { Place, AttachMoney } from '@mui/icons-material'
+import NameAvatar from '../../components/name-avatar';
 
 const PublishServiceCard = ({ service }) => {
   const [value, setValue] = React.useState(2)
@@ -19,7 +20,7 @@ const PublishServiceCard = ({ service }) => {
         <CardMedia
           component="img"
           height="170"
-          image={service.images[0]}
+          image={service.img[0]}
           alt="schedule image"
         />
         <CardContent>
@@ -37,8 +38,7 @@ const PublishServiceCard = ({ service }) => {
                 textAlignVertical: 'center',
               }}
             >
-              Location: {service.location.address} - {service.location.province}{' '}
-              - {service.location.country}
+              Location: {service.location.name}
             </Box>
           </Box>
           <Box sx={style.descriptionContainer}>
@@ -52,17 +52,16 @@ const PublishServiceCard = ({ service }) => {
                 textAlignVertical: 'center',
               }}
             >
-              Price: {service.price.from}$ - {service.price.to}$/
-              {service.price.unit}
+              Price: {service.price}
             </Box>
           </Box>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <div className="info">
-          <Avatar src="https://icdn.dantri.com.vn/2017/emma-watson-5-1488809769584.jpg"></Avatar>
+          <NameAvatar name={service.creator.name}/>
           <Typography sx={{fontSize: 12}} component="div">
-            Emma Watson
+            {service.creator.name}
           </Typography>
           <div className="icons">
             <Rating

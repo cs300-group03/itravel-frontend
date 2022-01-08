@@ -23,7 +23,7 @@ import CountdownAlert from '../../components/count-down-alert';
 const CreateSchedulePage = () => {
   const user = useSelector(state => state.auth.user);
   const [value, setValue] = React.useState([null, null])
-  const [trash, setTrash] = React.useState(null);
+  const fetchLocation = React.useRef(false);
   const [locations, setLocations] = React.useState([]);
   const [title, setTitle] = React.useState('');
   const [destination, setDestination] = React.useState(null);
@@ -34,12 +34,16 @@ const CreateSchedulePage = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    fetchLocation.current = true;
     async function getLocations() {
       const response = await getAllLocations();
       setLocations(response);
     }
     getLocations();
-  }, [trash]);
+    return () => {
+      fetchLocation.current = false;
+    };
+  }, []);
 
   React.useEffect(() => {
     async function createScheduleFunc() {

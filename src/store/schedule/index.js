@@ -38,7 +38,7 @@ const scheduleSlice = createSlice({
         toggleCurrentSchedule: (state) => {
             state.currentSchedule.status = !state.currentSchedule.status;
         },
-        resetLogout: (state) => {
+        resetLogoutSchedule: (state) => {
             state = {
                 currentSchedule: '',
                 mySchedules: [], // Complete schedules, not just ID. List of ID is in state.auth.user.schedules
@@ -51,5 +51,5 @@ const scheduleSlice = createSlice({
     },
 });
 
-export const { setCurrentSchedule, setSchedules, appendSchedule, concatSchedules, setFilteredSchedules, setTitle, setStart, setEnd, toggleCurrentSchedule } = scheduleSlice.actions;
+export const { setCurrentSchedule, setSchedules, appendSchedule, concatSchedules, setFilteredSchedules, setTitle, setStart, setEnd, toggleCurrentSchedule, resetLogoutSchedule } = scheduleSlice.actions;
 export const scheduleReducer = scheduleSlice.reducer;

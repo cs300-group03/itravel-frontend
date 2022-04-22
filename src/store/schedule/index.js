@@ -3,7 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const scheduleSlice = createSlice({
     name: 'schedule',
     initialState: {
-        currentSchedule: '',
+        currentSchedule: {
+            creator: {
+                _id: '',
+            },
+        },
         mySchedules: [], // Complete schedules, not just ID. List of ID is in state.auth.user.schedules
         filteredSchedules: [],
         title: '',
@@ -40,7 +44,11 @@ const scheduleSlice = createSlice({
         },
         resetLogoutSchedule: (state) => {
             state = {
-                currentSchedule: '',
+                currentSchedule: {
+                    creator: {
+                        _id: '',
+                    },
+                },
                 mySchedules: [], // Complete schedules, not just ID. List of ID is in state.auth.user.schedules
                 filteredSchedules: [],
                 title: '',
